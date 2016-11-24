@@ -10,9 +10,9 @@
     <link rel="icon" href="../../favicon.ico">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
     <style>#mapid { height: 400px;}</style>
-            
 
-  
+
+
     <title>Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
@@ -49,13 +49,52 @@
           <a class="navbar-brand" href="#">Project name</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          
+
         </div><!--/.navbar-collapse -->
       </div>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="#">CoMapR</a>
+       </div>
+
+
+
+         <!-- Single button -->
+         <div id="navbar"  class="btn-group">
+           <form class="navbar-form navbar-left">
+           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             User <span class="caret"></span>
+           </button>
+           <ul class="dropdown-menu">
+             <li><a href="#">Meine Projekte</a></li>
+             <li><a href="#">Mein Account</a></li>
+             <li role="separator" class="divider"></li>
+             <li><a href="#">Dieses Projekt teilen</a></li>
+           </ul>
+           </form>
+           <form class="navbar-form navbar-left">
+     <div class="form-group">
+       <input type="text" class="form-control" placeholder="Search for Datasets">
+     </div>
+     <button type="submit" class="btn btn-default">search</button>
+   </form>
+         </div>
+
+
+       <!--/.navbar-collapse -->
+     </div>
+   </nav>
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    
+
 
     <div class="container">
       <!-- Example row of columns -->
@@ -63,9 +102,9 @@
         <div class="col-md-6">
           <h2>Heading</h2>
             <div id="mapid"></div>
-            
-         
-    
+
+
+
         </div>
         <div class="col-md-3">
           <h2>Heading</h2>
@@ -96,7 +135,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <script type = "text/javascript"> 
+    <script type = "text/javascript">
         var mymap = L.map('mapid').setView([51.8506649, 7,4861347], 13);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
