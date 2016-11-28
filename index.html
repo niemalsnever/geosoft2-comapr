@@ -36,22 +36,6 @@
   </head>
 
   <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-
-        </div><!--/.navbar-collapse -->
-      </div>
       <nav class="navbar navbar-inverse navbar-fixed-top">
      <div class="container">
        <div class="navbar-header">
@@ -80,18 +64,25 @@
            </ul>
            </form>
            <form class="navbar-form navbar-left">
-     <div class="form-group">
-       <input type="text" class="form-control" placeholder="Search for Datasets">
-     </div>
-     <button type="submit" class="btn btn-default">search</button>
-   </form>
+               
+               <div class="form-group">
+                   <input type="text" class="form-control" placeholder="Search for Datasets">
+               </div>
+               
+               <button type="submit" class="btn btn-default">search</button>
+            </form>
          </div>
 
+            <form class="navbar-form navbar-right">
+               <button type="button" class="btn btn-info btn-m">
+                   <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+               </button>
+            </form>
 
        <!--/.navbar-collapse -->
      </div>
    </nav>
-    </nav>
+
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
@@ -110,27 +101,51 @@
           <h2>R-Script </h2>
 
               <label for="comment">r-script</label>
+
               <textarea class="form-control" rows="5" id="comment"></textarea>
 
             <div class="btn-group" >
                 <button type="button" class="btn btn-default">submit</button>
+
+              <textarea class="form-control" rows="7" id="comment" placeholder="add here your scripts"></textarea>
+          
+            <div class="btn-group" >
+                <button type="button" class="btn btn-success">submit</button>
+
               </div>
+          </div>
           </div>
         <div class="col-md-3">
           <h2>placeholder</h2>
           <p>Placeholder for data dropdown tree</p>
+
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+
+          
+            
+            <form method="post" enctype="multipart/form-data">
+                    <label>upload datasets<input name="datei" type="file" size="50" accept="text/*"> 
+                    </label>  
+                        <button type="button" class="btn btn-default btn-m">
+                                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                        </button>
+            </form>
+            
+            <label for="comment">CollabChat</label>
+            <textarea class="form-control" rows="12" id="comment" placeholder="type here for messages"></textarea>
+            
+
         </div>
       </div>
 
       <hr>
-
+        
       <footer>
         <p>&copy; 2016 Company, Inc.</p>
       </footer>
     </div> <!-- /container -->
 
-
+      
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
