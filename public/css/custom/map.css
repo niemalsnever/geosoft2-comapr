@@ -1,0 +1,4 @@
+/*Specifies the height of the main map*/
+div#mapid {
+    min-height: 400px;
+}

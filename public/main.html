@@ -12,11 +12,14 @@
     <!-- Custom styles for this template -->
     <link href="css/jumbotron.css" type="text/css" rel="stylesheet">
     <!-- END BOOTSTRAP EMBEDDING -->
-
+    <link rel="stylesheet" href="css/codemirror.css">
     <!-- BEGIN CUSTOM CSS EMBEDDING -->
     <link rel="stylesheet" href="css/custom/main_style.css">
     <link href="css/custom/map.css" type="text/css" rel="stylesheet">
+    <link rel=stylesheet href="../../doc/docs.css">
 
+    
+    <script src="../../lib/codemirror.js"></script>
 
     <!-- END CUSTOM CSS EMBEDDING -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -85,13 +88,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2 style="text-transform: uppercase;">Map <small>$PROJECTTITLE</small></h2>
-
+                    
                     <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;"
                         </div>
                     </div>
                 </div>
             </div>
-
+        
             <div class="row">
                 <div class="col-md-12"><h2>R-Script </h2>
                     <form>
@@ -101,7 +104,52 @@
                             <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="10" placeholder="Type your R-Script here..."></textarea>
+                            <form><textarea id="code" rows="12" cols="138" name="code">
+X <- list(height = 5.4, weight = 54)
+cat("Printing objects: "); print(X)
+print("Accessing individual elements:")
+cat(sprintf("Your height is %s and your weight is %s\n", X$height, X$weight))
+
+# Functions:
+square <- function(x) {
+  return(x * x)
+}
+cat(sprintf("The square of 3 is %s\n", square(3)))
+
+# In R, the last expression in a function is, by default, what is
+# returned. The idiomatic way to write the function is:
+square <- function(x) {
+  x * x
+}
+# or, for functions with short content:
+square <- function(x) x * x
+
+# Function arguments with default values:
+cube <- function(x = 5) x * x * x
+cat(sprintf("Calling cube with 2 : %s\n", cube(2))  # will give 2^3
+cat(sprintf("Calling cube        : %s\n", cube())   # will default to 5^3.
+
+powers <- function(x) list(x2 = x*x, x3 = x*x*x, x4 = x*x*x*x)
+
+cat("Powers of 3: "); print(powers(3))
+
+# Data frames
+df <- data.frame(letters = letters[1:5], '#letter' = 1:5)
+print(df$letters)
+print(df$`#letter`)
+
+# Operators:
+m1 <- matrix(1:6, 2, 3)
+m2 <- m1 %*% t(m1)
+cat("Matrix product: "); print(m2)
+
+# Assignments:
+a <- 1
+b <<- 2
+c = 3
+4 -> d
+5 ->> e
+</textarea></form>
                         </div>
                     </form>
                 </div>
@@ -126,104 +174,10 @@
                     </fieldset>
                 </form>
             </div>
-            <div class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-comment"></span> Chat
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </button>
-                        <ul class="dropdown-menu slidedown">
-                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-refresh">
-                            </span>Refresh</a></li>
-                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-ok-sign">
-                            </span>Available</a></li>
-                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-remove">
-                            </span>Busy</a></li>
-                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-time"></span>
-                                Away</a></li>
-                            <li class="divider"></li>
-                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span>
-                                Sign Out</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <ul class="chat">
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="right clearfix"><span class="chat-img pull-right">
-                            <img src="http://placehold.it/50/FA6F57/fff&amp;text=ME" alt="User Avatar" class="img-circle">
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
-                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="right clearfix"><span class="chat-img pull-right">
-                            <img src="http://placehold.it/50/FA6F57/fff&amp;text=ME" alt="User Avatar" class="img-circle">
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
-                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat">
-                                Send</button>
-                        </span>
-                    </div>
-                </div>
+            <div class="col-md-12">
+                <label for="chat">CollabChat</label>
+                <textarea class="form-control" rows="12" id="chat" placeholder="type here for messages"></textarea>
             </div>
-        </div>
-    </div>
-</div>
         </div>
     </div>
     <hr>
@@ -245,17 +199,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
 <script src="js/leaflet.js"></script>
 <script type="text/javascript">
-    map.on('draw:created', function (e) {
-const type = e.layerType;
-const layer = e.layer;
-
-            // When a user finishes editing a shape we get that information here
-            editableLayers.addLayer(layer);
-            console.log('draw:created->');
-            console.log(JSON.stringify(layer.toGeoJSON()));
-        });</script>
-
-
-
+</script>
+<script src="js/r.js"></script>
+<script src="js/javascript.js"></script>
+ <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+</script>
+<script src="js/codemirror.js"></script>
 </body>
 </html>
