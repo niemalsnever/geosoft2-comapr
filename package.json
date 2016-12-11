@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/niemalsnever/geosoft2-comapr/issues"
   },
+<<<<<<< HEAD
+  "homepage": "https://github.com/niemalsnever/geosoft2-comapr#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "sqlite3": "^3.1.8"
+  }
+=======
   "homepage": "https://github.com/niemalsnever/geosoft2-comapr#readme"
+>>>>>>> origin/master
 }
