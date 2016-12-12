@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,17 +15,17 @@
     <!-- END BOOTSTRAP EMBEDDING -->
     <link rel="stylesheet" href="css/codemirror.css">
     <!-- BEGIN CUSTOM CSS EMBEDDING -->
-    <link rel="stylesheet" href="css/custom/main_style.css">
     <link href="css/custom/map.css" type="text/css" rel="stylesheet">
-    <link rel=stylesheet href="../../doc/docs.css">
+
+    <!--<link rel=stylesheet href="../../doc/docs.css">-->
+    <!--<link rel="stylesheet" href="css/custom/main_style.css">-->
 
 
-    <script src="js/codemirror.js"></script>
 
     <!-- END CUSTOM CSS EMBEDDING -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/custom/file-uploader.js"></script>
-
+    <script src="js/codemirror.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css">
 
 
@@ -89,8 +90,7 @@
                 <div class="col-md-12">
                     <h2 style="text-transform: uppercase;">Map <small>$PROJECTTITLE</small></h2>
 
-                    <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;"
-                        </div>
+                    <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;">
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                             <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
                         </div>
                         <div class="form-group">
-                            <form><textarea id="code" rows="12" cols="138" name="code">
+                        <textarea id="code" rows="12" cols="138" name="code">
 X <- list(height = 5.4, weight = 54)
 cat("Printing objects: "); print(X)
 print("Accessing individual elements:")
@@ -149,7 +149,7 @@ b <<- 2
 c = 3
 4 -> d
 5 ->> e
-</textarea></form>
+</textarea>
                         </div>
                     </form>
                 </div>
@@ -164,12 +164,12 @@ c = 3
                     <fieldset>
                         <ol class="selected-files"></ol>
                         <div class="form-group btn-group">
-                        <label class="btn btn-primary btn-file">
-                            Browse <input type="file" style="display: none;" accept="image/*">
-                        </label>
-                        <button type="button" class="btn btn-default btn-m">
-                            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload
-                        </button>
+                            <label class="btn btn-primary btn-file">
+                                Browse <input type="file" style="display: none;" accept="image/*">
+                            </label>
+                            <button type="button" class="btn btn-default btn-m">
+                                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload
+                            </button>
                         </div>
                     </fieldset>
                 </form>
@@ -192,7 +192,7 @@ c = 3
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery-3.1.1.min"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
 <script src="js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -202,8 +202,8 @@ c = 3
 </script>
 <script src="js/r.js"></script>
 <script src="js/javascript.js"></script>
- <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
 </script>
 <script src="js/codemirror.js"></script>
 </body>
