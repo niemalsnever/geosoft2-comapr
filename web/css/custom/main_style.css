@@ -1,0 +1,16 @@
+body {
+    padding-top: 50px;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #cccccc;
+}
+.container .text-muted {
+    margin: 20px 0;
+}
+

@@ -18,7 +18,7 @@
     <link href="css/custom/map.css" type="text/css" rel="stylesheet">
 
     <!--<link rel=stylesheet href="../../doc/docs.css">-->
-    <!--<link rel="stylesheet" href="css/custom/main_style.css">-->
+    <link rel="stylesheet" href="css/custom/main_style.css">
 
 
 
@@ -85,7 +85,7 @@
 
 <div class="container-fluid" id="content">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-lg-10">
             <div class="row">
                 <div class="col-md-12">
                     <h2 style="text-transform: uppercase;">Map <small>$PROJECTTITLE</small></h2>
@@ -104,7 +104,7 @@
                             <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
                         </div>
                         <div class="form-group">
-                        <textarea id="code" rows="12" cols="138" name="code">
+                            <textarea id="code" rows="12" cols="138" name="code">
 X <- list(height = 5.4, weight = 54)
 cat("Printing objects: "); print(X)
 print("Accessing individual elements:")
@@ -149,13 +149,13 @@ b <<- 2
 c = 3
 4 -> d
 5 ->> e
-</textarea>
+                            </textarea>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-lg-2">
             <div class="col-md-12">
                 <h2>placeholder</h2>
                 <p>Placeholder for data dropdown tree</p>
@@ -180,7 +180,6 @@ c = 3
             </div>
         </div>
     </div>
-    <hr>
 </div> <!-- /container -->
 
 <footer class="footer">
@@ -203,7 +202,7 @@ c = 3
 <script src="js/r.js"></script>
 <script src="js/javascript.js"></script>
 <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    CodeMirror.fromTextArea(document.getElementById("code"), {});
 </script>
 <script src="js/codemirror.js"></script>
 </body>
