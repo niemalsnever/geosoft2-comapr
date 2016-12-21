@@ -1,4 +1,4 @@
-  
+
 "use strict";
 
 var mymap = L.map('mapid').setView([51.9606649, 7.6161347], 13);
@@ -39,4 +39,3 @@ mymap.addLayer(drawnItems);
             alert(JSON.stringify(drawnItems.toGeoJSON()));
            // document.getElementById("coordinates") = JSON.stringify(drawnItems.toGeoJSON()
         });
-
