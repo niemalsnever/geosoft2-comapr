@@ -14,6 +14,7 @@
     <link href="css/jumbotron.css" type="text/css" rel="stylesheet">
     <!-- END BOOTSTRAP EMBEDDING -->
     <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/bootstrap-treeview.css">
     <!-- BEGIN CUSTOM CSS EMBEDDING -->
     <link href="css/custom/map.css" type="text/css" rel="stylesheet">
 
@@ -23,10 +24,10 @@
 
 
     <!-- END CUSTOM CSS EMBEDDING -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/custom/file-uploader.js"></script>
-    <script src="js/codemirror.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css">
+
+
 
 
 </head>
@@ -104,7 +105,7 @@
                             <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
                         </div>
                         <div class="form-group">
-                            <textarea id="code" rows="12" cols="138" name="code">
+                            <textarea id="code" rows="12" cols="138" name="code" title="Code-Editor">
 X <- list(height = 5.4, weight = 54)
 cat("Printing objects: "); print(X)
 print("Accessing individual elements:")
@@ -156,9 +157,10 @@ c = 3
             </div>
         </div>
         <div class="col-md-3 col-lg-2">
+        <p> </p><div id="tree">
+
+           </div>
             <div class="col-md-12">
-                <h2>placeholder</h2>
-                <p>Placeholder for data dropdown tree</p>
                 <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
                 <form method="post" enctype="multipart/form-data">
                     <fieldset>
@@ -199,11 +201,14 @@ c = 3
 <script src="js/leaflet.js"></script>
 <script type="text/javascript">
 </script>
+<script src="js/bootstrap-treeview.js"></script>
+<script src="js/custom/tree_view.js"></script>
+<script src="js/custom/file-uploader.js"></script>
+<script src="js/codemirror.js"></script>
 <script src="js/r.js"></script>
 <script src="js/custom/codemirror_custom.js"></script>
 <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    CodeMirror.fromTextArea(document.getElementById("code"), {});
 </script>
-<script src="js/codemirror.js"></script>
 </body>
 </html>
