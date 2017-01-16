@@ -47,7 +47,7 @@ app.get('/logout', function(req, res){
 app.post('/register', function (req, res) {
     //console.log(req);
     helper.registerUser(req.body.regName,req.body.regEmail,req.body.regPassword);
-    res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ")");
+    res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ") <br> <a href='/'>Back to login page</a>");
 });
 
 app.listen(port);
