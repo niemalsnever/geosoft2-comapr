@@ -1,0 +1,41 @@
+html, body
+{
+    height: 100%;
+    overflow: hidden;
+}
+
+#content {
+    height: 100%;
+    margin: 0 auto -60px;
+    overflow-y: scroll;
+}
+
+div#welcome-and-signin {
+    background-image: url('https://placekitten.com/g/1920/1080');
+    background-repeat: no-repeat;
+    height: 100%;
+    margin-top: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: -60px;
+}
+
+div#regContainer {
+    background: #ffffff;
+}
+div#regContainer.rounded {
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #cccccc;
+}
+.container .text-muted {
+    margin: 20px 0;
+}

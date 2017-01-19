@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">
+    <title>CoMapR – $PROJECTTITLE</title>
+
+    <!-- BEGIN BOOTSTRAP EMBEDDING -->
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/jumbotron.css" type="text/css" rel="stylesheet">
+    <!-- END BOOTSTRAP EMBEDDING -->
+    <link rel="stylesheet" href="stylesheets/codemirror.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap-treeview.css">
+    <!-- BEGIN CUSTOM CSS EMBEDDING -->
+    <link href="stylesheets/custom/map.css" type="text/css" rel="stylesheet">
+
+    <!--<link rel=stylesheet href="../../doc/docs.css">-->
+    <link rel="stylesheet" href="stylesheets/custom/main_style.css">
+
+
+
+    <!-- END CUSTOM CSS EMBEDDING -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css">
+
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="main.html">CoMapR</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My Projects</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Files</a></li>
+                        <li><a href="#">Project Settings</a> </li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span> Share this Project</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-plus"></span> New Project</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <!--TODO: Let name of logged in user be displayed here -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user %> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My Account</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+                <li><form class="navbar-form navbar-nav">
+                        <button type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </button>
+                    </form></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" id="content">
+    <div class="row">
+        <div class="col-md-9 col-lg-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="text-transform: uppercase;">Map <small>$PROJECTTITLE</small></h2>
+
+                    <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12"><h2>R-Script </h2>
+                    <form>
+                        <div class="form-group btn-group">
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play-circle"></span> Run</button>
+                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save-file"></span> Save</button>
+                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="code" rows="12" cols="138" name="code" title="Code-Editor">
+X <- list(height = 5.4, weight = 54)
+cat("Printing objects: "); print(X)
+print("Accessing individual elements:")
+cat(sprintf("Your height is %s and your weight is %s\n", X$height, X$weight))
+
+# Functions:
+square <- function(x) {
+  return(x * x)
+}
+cat(sprintf("The square of 3 is %s\n", square(3)))
+
+# In R, the last expression in a function is, by default, what is
+# returned. The idiomatic way to write the function is:
+square <- function(x) {
+  x * x
+}
+# or, for functions with short content:
+square <- function(x) x * x
+
+# Function arguments with default values:
+cube <- function(x = 5) x * x * x
+cat(sprintf("Calling cube with 2 : %s\n", cube(2))  # will give 2^3
+cat(sprintf("Calling cube        : %s\n", cube())   # will default to 5^3.
+
+powers <- function(x) list(x2 = x*x, x3 = x*x*x, x4 = x*x*x*x)
+
+cat("Powers of 3: "); print(powers(3))
+
+# Data frames
+df <- data.frame(letters = letters[1:5], '#letter' = 1:5)
+print(df$letters)
+print(df$`#letter`)
+
+# Operators:
+m1 <- matrix(1:6, 2, 3)
+m2 <- m1 %*% t(m1)
+cat("Matrix product: "); print(m2)
+
+# Assignments:
+a <- 1
+b <<- 2
+c = 3
+4 -> d
+5 ->> e
+                            </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3">
+            <p> </p><div id="tree">
+
+            </div>
+            <div class="col-md-12">
+                <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+                <form method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <ol class="selected-files"></ol>
+                        <div class="form-group btn-group">
+                            <label class="btn btn-primary btn-file">
+                                Browse <input type="file" style="display: none;" accept="image/*">
+                            </label>
+                            <button type="button" class="btn btn-default btn-m">
+                                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-12">
+
+                <textarea type="textbox" title = "Code-Editor" id="output" rows = "10" cols = "40">
+</textarea>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">© 2016 CoMapR</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="javascripts/jquery-3.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery.min.js"><\/script>')</script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+<script src="javascripts/leaflet.js"></script>
+<script type="text/javascript">
+</script>
+<script src="javascripts/bootstrap-treeview.js"></script>
+<script src="javascripts/custom/tree_view.js"></script>
+<script src="javascripts/custom/file-uploader.js"></script>
+<script src="javascripts/codemirror.js"></script>
+<script src="javascripts/r.js"></script>
+<script src="javascripts/custom/codemirror_custom.js"></script>
+<script>
+    CodeMirror.fromTextArea(document.getElementById("code"), {});
+</script>
+</body>
+</html>
