@@ -10,6 +10,8 @@ if(db) {
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "name VARCHAR(100) NOT NULL, " +
             "email VARCHAR(250) NOT NULL, " +
+            "city VARCHAR(250) NOT NULL, " +
+            "country VARCHAR(250) NOT NULL, " +
             "password VARCHAR(250) NOT NULL, " +
             "salt VARCHAR(250) NOT NULL);");
         //Creates Projects table

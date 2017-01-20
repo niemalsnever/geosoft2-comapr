@@ -1,0 +1,90 @@
+<%- include('includes/head.ejs')%>
+
+    <!-- BEGIN CUSTOM CSS EMBEDDING -->
+    <link rel="stylesheet" href="stylesheets/custom/main_style.css">
+    <!-- END CUSTOM CSS EMBEDDING -->
+
+    <!--<link href="stylesheets/custom/map.css" type="text/css" rel="stylesheet">-->
+
+    <!-- BEGIN EMBEDDING ADDITIONAL CSS FILES FOR PLUGINS -->
+    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css">-->
+    <!--<link rel="stylesheet" href="stylesheets/codemirror.css">-->
+    <!-- END EMBEDDING ADDITIONAL CSS FILES FOR PLUGINS -->
+
+
+</head>
+<body>
+<%- include('includes/navbar.ejs') %>
+
+<div class="container-fluid" id="content">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><%= user.name %></h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="Pic" src="http://placekitten.com/g/300/300" class="img-circle img-responsive"> </div>
+
+                <div class=" col-md-9 col-lg-9 ">
+                    <table class="table table-user-information">
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td><%=user.name %></td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td><%= user.city %></td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td><%= user.country %></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><%=user.email %></td>
+                        </tr>
+                        <span class="pull-right">
+                            <a href="/edit" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">© 2016 CoMapR</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="javascripts/jquery-3.1.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="javascripts/vendor/jquery.min.js"><\/script>')</script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+    <script src="javascripts/leaflet.js"></script>
+    <script type="text/javascript">
+    </script>
+    <script src="javascripts/bootstrap-treeview.js"></script>
+    <script src="javascripts/custom/tree_view.js"></script>
+    <script src="javascripts/custom/file-uploader.js"></script>
+    <script src="javascripts/codemirror.js"></script>
+    <script src="javascripts/r.js"></script>
+    <script src="javascripts/custom/codemirror_custom.js"></script>
+    <script>
+        CodeMirror.fromTextArea(document.getElementById("code"), {});
+    </script>
+</body>
+</html>
