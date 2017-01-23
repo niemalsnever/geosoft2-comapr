@@ -11,7 +11,11 @@
 
 </head>
 <body>
-<%- include('includes/navbar.ejs') %>
+<% if(typeof user == 'undefined') { %>
+    <%- include('navbar_logged-out.ejs'); %>
+<% } else { %>
+    <%- include('includes/navbar.ejs'); %>
+<% } %>
 
 <!-- YOUR CONTENT GOES HERE! -->
 

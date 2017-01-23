@@ -32,7 +32,11 @@ router.get('/my-account', function (req, res) {
         });
     }
     else {
-        res.status(403).send("Sorry, you are not logged in. Please click here to get back to the <a href='/'>Login page</a>");
+        //res.status(403).send();
+        res.status(403).render('error',  {error: {
+            status: 403,
+            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+        } })
     }
 });
 
