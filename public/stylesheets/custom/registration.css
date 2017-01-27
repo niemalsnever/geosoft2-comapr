@@ -11,7 +11,7 @@ html, body
 }
 
 div#welcome-and-signin {
-    background-image: url('https://placekitten.com/1920/1080');
+    background-image: url('https://placekitten.com/g/1920/1080');
     background-repeat: no-repeat;
     height: 100%;
     margin-top: 0;

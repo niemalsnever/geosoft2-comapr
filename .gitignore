@@ -117,25 +117,7 @@ fabric.properties
 
 # project files should be checked into the repository, unless a significant
 # proportion of contributors will probably not be using SublimeText
-<<<<<<< HEAD
-*.sublime-project
-=======
-# *.sublime-project
->>>>>>> origin/master
 
-# sftp configuration file
-sftp-config.json
+# Project specific files
+comapr.db
 
-# Package control specific files
-Package Control.last-run
-Package Control.ca-list
-Package Control.ca-bundle
-Package Control.system-ca-bundle
-Package Control.cache/
-Package Control.ca-certs/
-bh_unicode_properties.cache
-
-# Sublime-github package stores a github token in this file
-# https://packagecontrol.io/packages/sublime-github
-GitHub.sublime-settings
-comapr.sublime-project
