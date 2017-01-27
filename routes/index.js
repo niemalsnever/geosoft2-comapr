@@ -19,7 +19,21 @@ router.get('/', function (req, res) {
 });
 
 router.get('/my-projects', function (req, res) {
-    res.redirect('/map-view');
+    if(req.user) {
+        //console.log(req.user.id);
+        var user;
+        db_functions.getUser(req.user.id, function (err, row) {
+            user = row;
+            res.render('my-projects', { title: 'My Account - ' + user.name + ' (' + user.email + ')', user: user });
+        });
+    }
+    else {
+        //res.status(403).send();
+        res.status(403).render('error',  {error: {
+            status: 403,
+            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+        } })
+    }
 });
 
 router.get('/my-account', function (req, res) {
