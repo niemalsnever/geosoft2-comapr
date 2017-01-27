@@ -1,8 +1,6 @@
 "use strict";
 
 var coordinates = [];
-var output;
-var uniqueCoordinates = [];
 //.fromTextArea(document.getElementById("output"), {});
 var mymap = L.map('mapid').setView([51.9606649, 7.6161347], 13);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -13,10 +11,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(mymap);
 var drawnItems = new L.FeatureGroup();
 
-
 mymap.addLayer(drawnItems);
-
-
 
 mymap.addControl(new L.Control.Draw({
     edit: {
@@ -35,23 +30,31 @@ mymap.addControl(new L.Control.Draw({
     }
 }));
 
-
-
-/*mymap.on(L.Draw.Event.CREATED, function (event) {
-    var layer = event.layer;
-    drawnItems.addLayer(layer);
-});
-*/
-
-
 mymap.on('draw:created', function(e) {
+    var type = e.layerType;
+    var layer = e.layer;
 
-    var type = e.layerType,
-        layer = e.layer;
+    logCoords(type, layer); //invokes a superfluous debug function, which also is broken
+
+    drawnItems.addLayer(layer);
+    editor.replaceRange(JSON.stringify(layer.toGeoJSON()) + "\n", {
+        line: Infinity
+    });
+});
+
+
+/**
+ * This is an unneccessary DEBUG function and needs to be removed!
+ * TODO!
+ * @param type
+ * @param layer
+ */
+function logCoords(type, layer) {
+    var geojson = {};
+    var latlngs;
 
     if (type === 'polygon') {
         // structure the geojson object
-        var geojson = {};
 
         geojson['type'] = 'Feature';
         geojson['geometry'] = {};
@@ -59,9 +62,9 @@ mymap.on('draw:created', function(e) {
 
         // export the coordinates from the layer
         coordinates = [];
-        var latlngs = layer.getLatLngs();
+        latlngs = layer.getLatLngs();
         console.log(latlngs);
-        for (var i = 0; i < latlngs.length; i++) {
+        for (i = 0; i < latlngs.length; i++) {
             coordinates.push([latlngs[i].lng, latlngs[i].lat])
         }
 
@@ -80,54 +83,38 @@ mymap.on('draw:created', function(e) {
 
             }
 
-
             console.log("punkt " + latlngs[0][i]);
         }
         drawnItems.addLayer(layer);
-        var div = document.getElementById('output');
-        div.innerHTML += JSON.stringify(layer.toGeoJSON())
-        document.getElementById('output').value = div.innerHTML;
+
     }
 
-
-
-
     if (type === 'marker') {
-        var geojson = {};
         geojson['type'] = 'Feature';
         geojson['geometry'] = {};
         geojson['geometry']['coordinates'] = [coordinates];
         //var latlngs = layer.getLatLngs();
         console.log(JSON.stringify(layer.getLatLng()));
         drawnItems.addLayer(layer);
-        var div = document.getElementById('output');
-        div.innerHTML += JSON.stringify(layer.toGeoJSON())
-        document.getElementById('output').value = div.innerHTML;
-    }
 
+    }
 
     if (type === 'rectangle') {
         // structure the geojson object
-        var geojson = {};
         geojson['type'] = 'Feature';
         geojson['geometry'] = {};
 
-
         // export the coordinates from the layer
 
-        var latlngs = layer.getLatLngs();
-        for (var i = 0; i < latlngs.length; i++) {
+        latlngs = layer.getLatLngs();
+        for (i = 0; i < latlngs.length; i++) {
             coordinates.push([latlngs[i].lng, latlngs[i].lat])
         }
 
         // push the coordinates to the json geometry
         geojson['geometry']['coordinates'] = [coordinates];
 
-
-
-
         // show the polygon as a geojson object in the console
-
         console.log(JSON.stringify(layer.toGeoJSON()));
 
         //skip duplicates
@@ -139,22 +126,15 @@ mymap.on('draw:created', function(e) {
         }
         drawnItems.addLayer(layer);
 
-        var div = document.getElementById('output');
-        div.innerHTML += JSON.stringify(layer.toGeoJSON())
-        document.getElementById('output').value = div.innerHTML;
-
     }
     if (type === 'polyline') {
         // structure the geojson object
-        var geojson = {};
         geojson['type'] = 'Feature';
         geojson['geometry'] = {};
 
-
-
         // export the coordinates from the layer
         coordinates = [];
-        var latlngs = layer.getLatLngs();
+        latlngs = layer.getLatLngs();
         for (var i = 0; i < latlngs.length; i++) {
             coordinates.push([latlngs[i].lng, latlngs[i].lat])
         }
@@ -181,14 +161,6 @@ mymap.on('draw:created', function(e) {
         }
         drawnItems.addLayer(layer);
 
-        // var div = document.getElementById('code');
-        // div.innerHTML += JSON.stringify(layer.toGeoJSON());
-        // document.getElementById('code').value = div.innerHTML;
-
-        editor.replaceRange("\n"+ JSON.stringify(layer.toGeoJSON()) + "\n", {line: Infinity});
-
     }
-});
-
-//todo: buttom mit koordinaten clearen
+}
 //
