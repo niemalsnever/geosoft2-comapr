@@ -7,14 +7,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CoMapR</a>
+            <a class="navbar-brand" href="/map-view">CoMapR</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">My Projects</a></li>
+                        <li><a href="/my-projects">My Projects</a></li>
                     </ul>
                 </li>
             </ul>
@@ -26,7 +26,7 @@
                         <li><a href="#">Project Settings</a> </li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span> Share this Project</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-plus"></span> New Project</a></li>
+                        <li><a data-toggle="modal" href="#myModal"><span class="glyphicon glyphicon-plus"></span> New Project </a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,3 +46,26 @@
         </div>
     </div>
 </nav>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">New Project</h4>
+        </div>
+        <div class="modal-body">
+          <tr>
+            <td>Name</td>
+            <td><input type="text" placeholder="The name of your project" class="form-control"></td>
+          </tr>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Create Project</button>
+            </div>
+    </div>
+    </div>
+    </div>

@@ -12,4 +12,7 @@ db.serialize(function () {
     console.log(now);
     //console.log("INSERT INTO Users VALUES (null, 'Hans', 'hans@test.de', '" + hash +"', '" + now +"');");
     db.run("INSERT INTO Users VALUES (null, 'Hans', 'hans@test.de','Münster','Deutschland', '" + hash +"', '" + now.toString() +"');");
+    
+    
+    db.run("INSERT INTO Projects VALUES ('123', 'test test', '1' , '1'")
 });
