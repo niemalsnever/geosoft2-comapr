@@ -7,16 +7,17 @@
   },
   "dependencies": {
     "body-parser": "~1.15.2",
+    "connect-ensure-login": "latest",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
     "express": "~4.14.0",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "sqlite3": "latest",
-    "connect-ensure-login": "latest",
     "express-session": "latest",
+    "morgan": "~1.7.0",
     "passport": "latest",
-    "passport-local": "latest"
+    "passport-local": "latest",
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.7.2",
+    "sqlite3": "latest"
   }
 }
