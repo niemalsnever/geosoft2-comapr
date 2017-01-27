@@ -1,0 +1,34 @@
+<%- include('includes/head.ejs')%>
+<!-- DO NOT EDIT BEFORE THIS LINE -->
+
+<!-- TODO: STICKY FOOTER!-->
+
+<!-- BEGIN CUSTOM CSS EMBEDDING -->
+<link rel="stylesheet" href="stylesheets/custom/main_style.css">
+<!-- END CUSTOM CSS EMBEDDING -->
+
+<!-- ALL CSS FILES MUST BE INCLUDED BEFORE THIS LINE! -->
+
+</head>
+<body>
+<% if(typeof user == 'undefined') { %>
+<%- include('includes/navbar_logged-out.ejs'); %>
+<% } else { %>
+<%- include('includes/navbar.ejs'); %>
+<% } %>
+<!-- YOUR CONTENT GOES HERE! -->
+<div class="alert alert-danger">
+    <h2>Error <%= error.status %></h2>
+    <%if(error.msg) {%>
+    <p><%- error.msg %></p>
+    <%}%>
+    <%if(error.stack) {%>
+    <pre><%= error.stack %></pre>
+    <%}%>
+</div>
+<%- include('includes/footer.ejs') %>
+<!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
+
+<!-- DO NOT EDIT AFTER THIS LINE -->
+</body>
+</html>

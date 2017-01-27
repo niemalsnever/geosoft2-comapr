@@ -12,8 +12,8 @@ module.exports.hashPassword = function hashPassword(password, salt) {
     return hash.digest('hex');
 };
 
-module.exports.registerUser = function (name, email, password) {
+module.exports.registerUser = function (name, email, city, country, password) {
     var now = Date.now().toString();
     var hash = this.hashPassword(password.toString(),now);
-    db.run("INSERT INTO Users VALUES (null, ?, ?, ?, ?);", name, email, hash, now);
+    db.run("INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, ?);", name, email, city, country, hash, now);
 };

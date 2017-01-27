@@ -15,11 +15,9 @@ module.exports = {
         passport.use('local', new LocalStrategy({usernameField: 'email'},function (email, password, done) {
             db.get('SELECT salt FROM Users WHERE email = ?', email, function (err, row) {
                 if (!row) {
-                    console.error("hit");
                     return done(null, false);
                 }
                 var hash = helper.hashPassword(password, row.salt);
-                console.log(hash);
                 db.get('SELECT email, id FROM users WHERE email = ? AND password = ?', email, hash, function (err, row) {
                     if (!row) {
                         return done(null, false);

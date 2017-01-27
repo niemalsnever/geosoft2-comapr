@@ -1,0 +1,44 @@
+<%- include('includes/head.ejs')%>
+<!-- DO NOT EDIT BEFORE THIS LINE -->
+
+<!-- TODO: STICKY FOOTER!-->
+
+<!-- BEGIN CUSTOM CSS EMBEDDING -->
+<link rel="stylesheet" href="stylesheets/custom/main_style.css">
+<!-- END CUSTOM CSS EMBEDDING -->
+
+<!-- ALL CSS FILES MUST BE INCLUDED BEFORE THIS LINE! -->
+
+</head>
+<body>
+<% if(typeof user == 'undefined') { %>
+    <%- include('navbar_logged-out.ejs'); %>
+<% } else { %>
+    <%- include('includes/navbar.ejs'); %>
+<% } %>
+<div class="panel-body">
+            <div class="row">
+
+                <div class=" col-md-9 col-lg-9 "align="center" >
+                    <table class="table table-user-information">
+                        <tbody>
+                        <tr>
+                            <header><b>My Projects</b></header>
+                            <td>testtest</td>
+                         </tr>
+                        <span class="pull-right">
+                            <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-share"></i></a>
+                            <a data-original-title="Remove this project" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+<%- include('includes/footer.ejs') %>
+<!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
+<!-- DO NOT EDIT AFTER THIS LINE -->
+</body>
+</html>

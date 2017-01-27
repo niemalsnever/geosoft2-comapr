@@ -1,32 +1,23 @@
 {
-  "name": "geosoft2-comapr",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "Geosoft2-CoMapR",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/niemalsnever/geosoft2-comapr.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/niemalsnever/geosoft2-comapr/issues"
-  },
-  "homepage": "https://github.com/niemalsnever/geosoft2-comapr#readme",
   "dependencies": {
-    "express": "latest",
-    "sqlite3": "latest",
-    "body-parser": "latest",
+    "body-parser": "~1.15.2",
     "connect-ensure-login": "latest",
-    "cookie-parser": "latest",
-    "ejs": "latest",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
     "express-session": "latest",
-    "morgan": "latest",
+    "morgan": "~1.7.0",
     "passport": "latest",
-    "passport-local": "latest"
+    "passport-local": "latest",
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.7.2",
+    "sqlite3": "latest"
   }
 }
