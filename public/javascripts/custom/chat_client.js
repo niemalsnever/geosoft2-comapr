@@ -3,14 +3,14 @@ $(document).ready(function(){
     var socket = io.connect();
     // neue Nachricht
     socket.on('chat', function (data) {
-        var zeit = new Date(data.zeit);
+        var time = new Date(data.time);
         $('#chat_content').append(
             $('<li></li>').append(
                 // Uhrzeit
                 $('<span>').text('[' +
-                    (zeit.getHours() < 10 ? '0' + zeit.getHours() : zeit.getHours())
+                    (time.getHours() < 10 ? '0' + time.getHours() : time.getHours())
                     + ':' +
-                    (zeit.getMinutes() < 10 ? '0' + zeit.getMinutes() : zeit.getMinutes())
+                    (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes())
                     + '] '
                 ),
                 // Name
@@ -20,7 +20,7 @@ $(document).ready(function(){
         );
     });
     // Nachricht senden
-    function senden(){
+    function send(){
         // Eingabefelder auslesen
         var name = $('#name').val();
         var text = $('#text').val();
@@ -30,11 +30,11 @@ $(document).ready(function(){
         $('#text').val('');
     }
     // bei einem Klick
-    $('#senden').click(senden);
+    $('#send').click(send);
     // oder mit der Enter-Taste
     $('#text').keypress(function (e) {
         if (e.which == 13) {
-            senden();
+            send();
         }
     });
 });
