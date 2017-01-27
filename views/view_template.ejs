@@ -12,13 +12,13 @@
 </head>
 <body>
 <% if(typeof user == 'undefined') { %>
-    <%- include('navbar_logged-out.ejs'); %>
+    <%- include('includes/navbar_logged-out.ejs'); %>
 <% } else { %>
     <%- include('includes/navbar.ejs'); %>
 <% } %>
 
 <!-- YOUR CONTENT GOES HERE! -->
-
+<%- include('includes/modals.ejs') %>
 <%- include('includes/footer.ejs') %>
 <!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
 

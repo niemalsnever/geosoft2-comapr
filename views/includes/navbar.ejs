@@ -26,13 +26,12 @@
                         <li><a href="#">Project Settings</a> </li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span> Share this Project</a></li>
-                        <li><a data-toggle="modal" href="#myModal"><span class="glyphicon glyphicon-plus"></span> New Project </a></li>
+                        <li><a data-toggle="modal" href="#newProjectModal"><span class="glyphicon glyphicon-plus"></span> New Project </a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <!--TODO: Let name of logged in user be displayed here -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.name + ' (' + user.email + ')' %> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/my-account">My Account</a></li>
@@ -47,25 +46,3 @@
     </div>
 </nav>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">New Project</h4>
-        </div>
-        <div class="modal-body">
-          <tr>
-            <td>Name</td>
-            <td><input type="text" placeholder="The name of your project" class="form-control"></td>
-          </tr>
-        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Create Project</button>
-            </div>
-    </div>
-    </div>
-    </div>

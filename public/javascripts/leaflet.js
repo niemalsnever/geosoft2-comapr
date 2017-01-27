@@ -181,13 +181,14 @@ mymap.on('draw:created', function(e) {
         }
         drawnItems.addLayer(layer);
 
-        var div = document.getElementById('output');
-        div.innerHTML += JSON.stringify(layer.toGeoJSON());
-        document.getElementById('output').value = div.innerHTML;
+        // var div = document.getElementById('code');
+        // div.innerHTML += JSON.stringify(layer.toGeoJSON());
+        // document.getElementById('code').value = div.innerHTML;
+
+        editor.replaceRange("\n"+ JSON.stringify(layer.toGeoJSON()) + "\n", {line: Infinity});
 
     }
 });
 
 //todo: buttom mit koordinaten clearen
-//codemirror reinhauen
 //

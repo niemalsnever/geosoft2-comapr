@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
     if(!req.user) {
         res.render('index', { title: 'CoMapR - Login' });
     } else {
-        res.redirect('/my-account');
+        res.redirect('/my-projects');
     }
 });
 
@@ -28,7 +28,6 @@ router.get('/my-projects', function (req, res) {
         });
     }
     else {
-        //res.status(403).send();
         res.status(403).render('error',  {error: {
             status: 403,
             msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
@@ -46,7 +45,6 @@ router.get('/my-account', function (req, res) {
         });
     }
     else {
-        //res.status(403).send();
         res.status(403).render('error',  {error: {
             status: 403,
             msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
@@ -75,10 +73,13 @@ router.get('/edit', function (req, res) {
 router.get('/map-view', function (req, res) {
     if(req.user) {
         //console.log(req.user);
-        res.render('map-view', { title: 'CoMapR', user: req.user });
+        res.render('map-view', { title: 'Map View', user: req.user });
     }
     else {
-        res.status(403).send("Sorry, you are not logged in. Please click here to get back to the <a href='/'>Login page</a>");
+        res.status(403).render('error',  {error: {
+            status: 403,
+            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+        } })
     }
 });
 
@@ -88,10 +89,13 @@ router.post('/login', pp.pass.authenticate('local', {
 
 router.get('/good-login', function (req, res) {
     if(req.user) {
-        res.redirect('/my-account');
+        res.redirect('/my-projects');
     }
     else {
-        res.status(403).send("Sorry, you are not logged in. Please click here to get back to the <a href='/'>Login page</a>");
+        res.status(403).render('error',  {error: {
+            status: 403,
+            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+        } })
     }
 });
 
