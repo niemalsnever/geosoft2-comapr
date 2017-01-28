@@ -28,10 +28,13 @@ router.get('/my-projects', function (req, res) {
         });
     }
     else {
-        res.status(403).render('error',  {error: {
-            status: 403,
-            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
-        } })
+        res.status(403).render('error', {
+            error: {
+                status: 403,
+                msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+            },
+            rto: '/my-projects'
+        });
     }
 });
 
@@ -45,29 +48,32 @@ router.get('/my-account', function (req, res) {
         });
     }
     else {
-        res.status(403).render('error',  {error: {
-            status: 403,
-            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
-        } })
+        res.status(403).render('error', {
+            error: {
+                status: 403,
+                msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+            },
+            rto: '/my-account'
+        });
     }
 });
 
 router.get('/edit', function (req, res) {
-   if(req.user) {
-       //console.log(req.user.id);
-       var user;
-       db_functions.getUser(req.user.id, function (err, row) {
-           user = row;
-           res.render('edit', { title: 'My Account - ' + user.name + ' (' + user.email + ')', user: user });
-       });
-   }
-   else {
-       //res.status(403).send();
-       res.status(403).render('error',  {error: {
-           status: 403,
-           msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
-       } })
-   }
+    if(req.user) {
+        //console.log(req.user.id);
+        var user;
+        db_functions.getUser(req.user.id, function (err, row) {
+            user = row;
+            res.render('edit', { title: 'My Account - ' + user.name + ' (' + user.email + ')', user: user });
+        });
+    }
+    else {
+        //res.status(403).send();
+        res.status(403).render('error',  { error: {
+            status: 403,
+            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+        } })
+    }
 });
 
 router.get('/map-view', function (req, res) {
@@ -76,22 +82,45 @@ router.get('/map-view', function (req, res) {
         res.render('map-view', { title: 'Map View', user: req.user });
     }
     else {
-        res.status(403).render('error',  {error: {
-            status: 403,
-            msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
-        } })
+        res.status(403).render('error',  {
+            error: {
+                status: 403,
+                msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
+            },
+            rto: '/map-view'
+        })
     }
 });
 
-router.post('/login', pp.pass.authenticate('local', {
-    successRedirect: '/good-login',
-    failureRedirect: '/bad-login' }));
+// router.post('/login', pp.pass.authenticate('local', {
+//      successRedirect: /good-login,
+//      failureRedirect: '/bad-login' }));
+
+router.post('/login', function(req, res, next) {
+    console.log(req.body);
+    pp.pass.authenticate('local', function(err, user, info) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/');
+        }
+        req.logIn(user, function(err) {
+            if (err) {
+                return next(err);
+            }
+            return res.redirect(req.body.rto || '/');
+        });
+    })(req, res, next);
+});
 
 router.get('/good-login', function (req, res) {
-    if(req.user) {
+    //console.log(req);
+    if(req.user && (req.body.rto != '' && req.body.rto)) {
+        res.redirect(req.body.rto);
+    } else if(req.user) {
         res.redirect('/my-projects');
-    }
-    else {
+    } else {
         res.status(403).render('error',  {error: {
             status: 403,
             msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
