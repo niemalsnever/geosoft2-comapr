@@ -1,3 +1,9 @@
+<%
+ if(typeof rto == 'undefined') {
+     var rto = "";
+ }
+ %>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -17,6 +23,7 @@
                 </div>
                 <div class="form-group">
                     <input type="password" placeholder="Password" class="form-control" name="password">
+                    <input type="hidden" name="rto" value="<%= rto %>">
                 </div>
                 <button type="submit" class="btn btn-success">Sign in</button>
             </form>

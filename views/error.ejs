@@ -1,5 +1,9 @@
-<%- include('includes/head.ejs')%>
+<%- include('includes/head.ejs') %>
 <!-- DO NOT EDIT BEFORE THIS LINE -->
+
+<style type="text/css">
+
+</style>
 
 <!-- TODO: STICKY FOOTER!-->
 
@@ -17,14 +21,21 @@
 <%- include('includes/navbar.ejs'); %>
 <% } %>
 <!-- YOUR CONTENT GOES HERE! -->
-<div class="alert alert-danger">
-    <h2>Error <%= error.status %></h2>
-    <%if(error.msg) {%>
-    <p><%- error.msg %></p>
-    <%}%>
-    <%if(error.stack) {%>
-    <pre><%= error.stack %></pre>
-    <%}%>
+<div class="container-fluid">
+    <p></p>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h2 class="panel-title">Error <%= error.status %></h2>
+        </div>
+        <div class="panel-body">
+            <%if(error.msg) {%>
+            <p><%- error.msg %></p>
+            <%}%>
+            <%if(error.stack) {%>
+            <pre><%= error.stack %></pre>
+            <%}%>
+        </div>
+    </div>
 </div>
 <%- include('includes/footer.ejs') %>
 <!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
