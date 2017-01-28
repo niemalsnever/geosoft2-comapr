@@ -2,3 +2,7 @@ ul#chat_content {
     list-style-type: none;
     font-size: small;
 }
+.CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+}

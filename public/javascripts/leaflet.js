@@ -37,7 +37,7 @@ mymap.on('draw:created', function(e) {
     logCoords(type, layer); //invokes a superfluous debug function, which also is broken
 
     drawnItems.addLayer(layer);
-    editor.replaceRange(JSON.stringify(layer.toGeoJSON()) + "\n", {
+    editor.replaceRange("#" + JSON.stringify(layer.toGeoJSON()) + "\n", {
         line: Infinity
     });
 });

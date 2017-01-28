@@ -1,92 +1,78 @@
-<!-- This is the CoMapR Login Page -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<%- include('includes/head.ejs')%>
+<!-- DO NOT EDIT BEFORE THIS LINE -->
 
-    <!-- BEGIN BOOTSTRAP EMBEDDING -->
-    <!-- Bootstrap core CSS -->
-    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="stylesheets/jumbotron.css" rel="stylesheet">
-    <!-- END BOOTSTRAP EMBEDDING -->
+<!-- BEGIN CUSTOM CSS EMBEDDING -->
+<link rel="stylesheet" href="stylesheets/custom/main_style.css">
+<link rel="stylesheet" href="stylesheets/custom/registration.css">
+<!-- END CUSTOM CSS EMBEDDING -->
 
-    <!-- BEGIN CUSTOM CSS EMBEDDING -->
-    <link href="stylesheets/custom/registration.css" type="text/css" rel="stylesheet">
-    <!-- END CUSTOM CSS EMBEDDING -->
+<!-- ALL CSS FILES MUST BE INCLUDED BEFORE THIS LINE! -->
 
-    <!-- BEGIN CUSTOM JS EMBEDDING -->
-    <script src="javascripts/custom/registration.js" type="text/javascript"></script>
-    <!-- END CUSTOM JS EMBEDDING -->
-
-    <title>CoMapR</title>
 </head>
+<body>
+<% if(typeof user == 'undefined') { %>
+<%- include('includes/navbar_logged-out.ejs'); %>
+<% } else { %>
+<%- include('includes/navbar.ejs'); %>
+<% } %>
 
-<body onload="
-        if($(window).width() > 768) {
-            console.log('bar');
-$('div#regContainer').addClass('rounded');}
-">
-<%- include('includes/navbar_logged-out.ejs') %>
+<!-- YOUR CONTENT GOES HERE! -->
 
-
-<div class="jumbotron" id="welcome-and-signin">
+<div class="container-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-md-8" style="color: #ffffff">
-                <h1>Welcome to CoMapR!</h1>
-                <p class="hidden-xs">Use CoMapR to analyse collaboratively with R on satelite immagery</p>
+            <div class="col-md-8">
+                <div class="page-header"><h1>Welcome to CoMapR!</h1></div>
+                <p class="hidden-xs lead">Use CoMapR to analyse collaboratively with R on satelite immagery</p>
             </div>
             <div class="col-md-4 container" id="regContainer">
-                <h2>Sign-up here</h2>
-                <form name="registration" id="regForm" method="post" action="/register">
-                    <div class="form-group">
-                        <label for="regNameInput">Your Name</label>
-                        <input type="text" class="form-control" id="regNameInput" placeholder="Name" onchange="validateRegForm();" required aria-required="true" name="regName">
+                <div class="panel panel-default regPanel">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Sign-up here</h2>
                     </div>
-                    <div class="form-group">
-                        <label for="regEmailInput">E-Mail-Address</label>
-                        <input type="email" class="form-control" id="regEmailInput" placeholder="E-Mail" onchange="validateRegForm();" required aria-required="true" name="regEmail">
+                    <div class="panel-body">
+                    <form name="registration" id="regForm" method="post" action="/register">
+                        <div class="form-group">
+                            <label for="regNameInput">Your Name</label>
+                            <input type="text" class="form-control" id="regNameInput" placeholder="Name" onchange="validateRegForm();" required aria-required="true" name="regName">
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmailInput">E-Mail-Address</label>
+                            <input type="email" class="form-control" id="regEmailInput" placeholder="E-Mail" onchange="validateRegForm();" required aria-required="true" name="regEmail">
+                        </div>
+                        <div class="form-group">
+                            <label for="regPasswordInput">Password</label>
+                            <input type="password" class="form-control" id="regPasswordInput" placeholder="Password" onchange="validateRegForm();" required aria-required="true" name="regPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="regCityInput">City</label>
+                            <input type="text" class="form-control" id="regCityInput" placeholder="City" onchange="validateRegForm();" required aria-required="true" name="regCity">
+                        </div>
+                        <div class="form-group">
+                            <label for="regCountryInput">Country</label>
+                            <!--<input type="text" class="form-control" id="regCountryInput" placeholder="Country" onchange="validateRegForm();" required aria-required="true" name="regCountry">-->
+                            <%- include('includes/cl_dropdown.ejs') %>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block" disabled type="submit" id="regSubmit">Sign up</button><button class="btn btn-default btn-block" type="reset">Reset</button>
+                        </div>
+                    </form>
                     </div>
-                    <div class="form-group">
-                        <label for="regPasswordInput">Password</label>
-                        <input type="password" class="form-control" id="regPasswordInput" placeholder="Password" onchange="validateRegForm();" required aria-required="true" name="regPassword">
-                    </div>
-                    <div class="form-group">
-                        <label for="regCityInput">City</label>
-                        <input type="text" class="form-control" id="regCityInput" placeholder="City" onchange="validateRegForm();" required aria-required="true" name="regCity">
-                    </div>
-                    <div class="form-group">
-                        <label for="regCountryInput">Country</label>
-                        <!--<input type="text" class="form-control" id="regCountryInput" placeholder="Country" onchange="validateRegForm();" required aria-required="true" name="regCountry">-->
-                        <%- include('includes/cl_dropdown.ejs') %>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success btn-block" disabled type="submit" id="regSubmit">Sign up</button><button class="btn btn-default btn-block" type="reset">Reset</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<!-- NO CONTENT AFTER THIS LINE -->
+<%- include('includes/modals.ejs') %>
 <%- include('includes/footer.ejs') %>
+<!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
 
+<!-- BEGIN CUSTOM JS EMBEDDING -->
+<script src="javascripts/custom/registration.js" type="text/javascript"></script>
+<!-- END CUSTOM JS EMBEDDING -->
 
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery.min.js"><\/script>')</script>
-<script src="javascripts/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(window).on('resize', function () {
-        $('div#regContainer').toggleClass('rounded', $(window).width() > 768);
-    });
-</script>
+<!-- DO NOT EDIT AFTER THIS LINE -->
 </body>
 </html>

@@ -23,15 +23,15 @@
         <div class="col-md-9 col-lg-10">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 style="text-transform: uppercase;">Map <small>$PROJECTTITLE</small></h2>
-
-                    <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;">
+                    <h2 style="text-transform: uppercase;">Map</h2>
+                    <div class="collapse in" id="mapcontainer">
+                    <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;"></div>
                     </div>
                 </div>
             </div>
-
             <div class="row">
-                <div class="col-md-12"><h2>R-Script </h2>
+                <div class="col-md-12"><h2>Editor <small>$FILENAME</small></h2>
+                    <div class="collapse in" id="code-editor">
                     <form>
                         <div class="form-group btn-group">
                             <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play-circle"></span> Run</button>
@@ -39,9 +39,10 @@
                             <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
                         </div>
                         <div class="form-group">
-                            <textarea id="code" rows="12" cols="138" name="code" title="Code-Editor"></textarea>
+                            <textarea id="code" rows="3" cols="138" name="code" title="Code-Editor"></textarea>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,7 +81,8 @@
                 </div>
             </div>
             <div class="row">
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#testModal">Open Test Modal</button>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#mapcontainer">Toggle Map</button>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#code-editor">Toggle Editor</button>
             </div>
             <!--<div class="col-md-12"><textarea type="textbox" id="output" rows = "10" cols = "30"></textarea></div>-->
         </div>
@@ -98,7 +100,10 @@
 <script src="javascripts/r.js"></script>
 <script src="javascripts/custom/codemirror_custom.js"></script>
 <script>
-    editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers:true,
+        lineWrapping: true
+    });
 </script>
 <!-- Codemirror Files -->
 

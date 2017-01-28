@@ -12,7 +12,7 @@ router.use(pp.pass.session());
 /* GET home page. */
 router.get('/', function (req, res) {
     if(!req.user) {
-        res.render('index', { title: 'CoMapR - Login' });
+        res.render('index', { title: 'Login' });
     } else {
         res.redirect('/my-projects');
     }
@@ -98,6 +98,7 @@ router.get('/map-view', function (req, res) {
 
 router.post('/login', function(req, res, next) {
     console.log(req.body);
+    //noinspection JSUnusedLocalSymbols
     pp.pass.authenticate('local', function(err, user, info) {
         if (err) {
             return next(err);
