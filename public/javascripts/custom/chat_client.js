@@ -19,6 +19,7 @@ $(document).ready(function(){
                 $('<span>').text(data.text))
         );
     });
+    
     // Nachricht senden
     function send(){
         // Eingabefelder auslesen
@@ -37,4 +38,14 @@ $(document).ready(function(){
             send();
         }
     });
+});
+
+var socket = io.connect();
+
+socket.on("chat", function(data, msg) {  
+  $("#msgs").append("<li><strong><span class='text-success'>" + data.name + "</span></strong>: " + msg + "</li>");
+  //clear typing field
+   $("#"+data.name+"").remove();
+   clearTimeout(timeout);
+   timeout = setTimeout(timeoutFunction, 0);
 });

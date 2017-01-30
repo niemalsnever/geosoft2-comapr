@@ -12,36 +12,45 @@
 </head>
 <body>
 <% if(typeof user == 'undefined') { %>
-<%- include('navbar_logged-out.ejs'); %>
+    <%- include('includes/navbar_logged-out.ejs'); %>
 <% } else { %>
-<%- include('includes/navbar.ejs'); %>
+    <%- include('includes/navbar.ejs'); %>
 <% } %>
 
-<div class="container-fluid">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title">My Projects</h2>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class=" col-md-9 col-lg-9 ">
-                        <ul>
-                            <li>testtest</li>
-                        </ul>
-                    </div>
-                    <span class="pull-right">
-                        <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-share"></i></a>
-                        <a data-original-title="Remove this project" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                    </span>
+<div class="panel-body">
+            <div class="row">
+
+                <div class=" col-md-9 col-lg-9 "align="center" >
+                    <table class="table table-user-information">
+                        <tbody>
+                    
+                            <header><b>My Projects</b></header>
+                             <% for(i = 0; i < rows.length; i++) { %>
+                            
+                            <tr>
+                                <form action="/deleteProject" method= "post">
+	                               <td><a href="/map-view"><%= rows[i].name %></a>
+                                       <span class="pull-right">
+                                           <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-share"></i></a>
+                                           <!-- FIXME -->
+                                           <a data-original-title="Remove this project" data-toggle="tooltip" onclick=deleteProject(<%= rows[i].projectid%>) class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                                           
+                                       </span>
+                                    </td>
+                                    </form>
+                                   </tr> 
+                             <% } %>
+                        </tbody>
+                        
+                    </table>
+
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<%- include('includes/modals.ejs') %>
+    
 <%- include('includes/footer.ejs') %>
 <!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
+    <script src="javascripts/custom/projectmanagement.js"></script>
 <!-- DO NOT EDIT AFTER THIS LINE -->
 </body>
 </html>

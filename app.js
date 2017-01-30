@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 var io = require('socket.io')(http);
-
+var socket = require('socket.io')(http);
 
 var index = require('./routes/index');
 //var api = require('./routes/api');
@@ -50,6 +50,25 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error', { user: req.user });
+});
+
+
+var typing = false;  
+var timeout = undefined;
+
+function timeoutFunction() {  
+  typing = false;
+  socket.emit("typing", false);
+}
+
+socket.on("typing", function(data) {  
+  if (data.user === "undefined"){
+      res.status(err.status || 500);
+      res.render('error', { user: req.user });
+      }
+    else{
+    io.sockets.emit("isTyping", {isTyping: req.user});
+    }
 });
 
 module.exports = app;
