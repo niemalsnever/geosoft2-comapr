@@ -18,5 +18,6 @@ db.serialize(function () {
     
     db.run("INSERT INTO Permissions VALUES (null, '1', '123', 'true', 'true', 'true' );");
     db.run("INSERT INTO Permissions VALUES (null, '1', '124', 'true', 'true', 'true' );");
-
 });
+
+db.close();

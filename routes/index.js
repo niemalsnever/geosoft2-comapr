@@ -22,7 +22,6 @@ router.get('/', function (req, res) {
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
-        var user;
         db_functions.getUserProjects(req.user.id, function (err, rows) {
             projects = rows;
             console.log(rows);
@@ -99,7 +98,7 @@ router.get('/map-view', function (req, res) {
 //      failureRedirect: '/bad-login' }));
 
 router.post('/login', function(req, res, next) {
-    console.log(req.body);
+    //console.log(req.body);
     //noinspection JSUnusedLocalSymbols
     pp.pass.authenticate('local', function(err, user, info) {
         if (err) {
@@ -152,7 +151,7 @@ router.post('/newProject', function (req, res) {
 router.post('/deleteProject', function(req, res){
     helper.deleteProject(req.body.projectid);
     res.redirect("/");
-})
+});
 
 //SAVE from Textarea to R-File
 router.post('/getcode', function(req, res){

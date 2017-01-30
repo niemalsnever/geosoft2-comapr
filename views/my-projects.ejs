@@ -12,45 +12,39 @@
 </head>
 <body>
 <% if(typeof user == 'undefined') { %>
-    <%- include('includes/navbar_logged-out.ejs'); %>
+<%- include('includes/navbar_logged-out.ejs'); %>
 <% } else { %>
-    <%- include('includes/navbar.ejs'); %>
+<%- include('includes/navbar.ejs'); %>
 <% } %>
 
 <div class="panel-body">
-            <div class="row">
-
-                <div class=" col-md-9 col-lg-9 "align="center" >
-                    <table class="table table-user-information">
-                        <tbody>
-                    
-                            <header><b>My Projects</b></header>
-                             <% for(i = 0; i < rows.length; i++) { %>
-                            
-                            <tr>
-                                <form action="/deleteProject" method= "post">
-	                               <td><a href="/map-view"><%= rows[i].name %></a>
-                                       <span class="pull-right">
-                                           <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-share"></i></a>
-                                           <!-- FIXME -->
-                                           <a data-original-title="Remove this project" data-toggle="tooltip" onclick=deleteProject(<%= rows[i].projectid%>) class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                                           
-                                       </span>
-                                    </td>
-                                    </form>
-                                   </tr> 
-                             <% } %>
-                        </tbody>
-                        
-                    </table>
-
-                </div>
-            </div>
+    <div class="row">
+        <div class=" col-md-9 col-lg-9" align="center" >
+            <table class="table table-user-information">
+                <tbody>
+                <header><b>My Projects</b></header>
+                <% for(i = 0; i < rows.length; i++) { %>
+                <tr>
+                    <form action="/deleteProject" method= "post">
+                        <td><a href="/map-view"><%= rows[i].projectname %></a>
+                            <span class="pull-right">
+                                <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-info"><i class="glyphicon glyphicon-share"></i> Invite User</a>
+                                <!-- FIXME -->
+                                <a data-original-title="Remove this project" data-toggle="tooltip" onclick="deleteProject(<%= rows[i].projectid %>)" class="btn btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete Project</a>
+                            </span>
+                        </td>
+                    </form>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
         </div>
-    
+    </div>
+</div>
+
 <%- include('includes/footer.ejs') %>
 <!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
-    <script src="javascripts/custom/projectmanagement.js"></script>
+<script src="javascripts/custom/projectmanagement.js"></script>
 <!-- DO NOT EDIT AFTER THIS LINE -->
 </body>
 </html>

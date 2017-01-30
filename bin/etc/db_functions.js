@@ -15,7 +15,7 @@ module.exports = {
     ,
     getUserProjects : function(id, callback){
         db.serialize(function() {
-            db.all('select * from Projects inner join Permissions on Projects.id = Permissions.projectid where Permissions.userid = ? OR Projects.ownerid = ?', id, id, function(err, rows)
+            db.all('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?', id, id, function(err, rows)
                   {
                 callback(err, rows);
             });
@@ -27,7 +27,7 @@ module.exports = {
     deleteProject : function(id, callback){
         db.run('delete from Projects where Projects.id = ?', id ,function(err, result)
               {
-            callback (err, row);
+            callback (err, result);
         });
     }
 };

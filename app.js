@@ -42,6 +42,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
+//noinspection JSUnusedLocalSymbols
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
@@ -50,25 +51,6 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error', { user: req.user });
-});
-
-
-var typing = false;  
-var timeout = undefined;
-
-function timeoutFunction() {  
-  typing = false;
-  socket.emit("typing", false);
-}
-
-socket.on("typing", function(data) {  
-  if (data.user === "undefined"){
-      res.status(err.status || 500);
-      res.render('error', { user: req.user });
-      }
-    else{
-    io.sockets.emit("isTyping", {isTyping: req.user});
-    }
 });
 
 module.exports = app;
