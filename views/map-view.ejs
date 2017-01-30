@@ -25,21 +25,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="btn-group btn-group-xs">
-                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mapcontainer">Toggle Map</button>
-                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#code-editor">Toggle Editor</button>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2 style="text-transform: uppercase;">Map <small>$PROJECTNAME</small></h2>
+                    <h2 style="text-transform: uppercase;">Map <small>$PROJECTNAME</small>  
+                    <button type="button" title="Toggle map" class="btn btn-default" data-toggle="collapse" data-target="#mapcontainer"><span class="glyphicon glyphicon-eye-close"></span></button></h2>
                     <div class="collapse in" id="mapcontainer">
                         <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;"></div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12"><h2>Editor <small>$FILENAME</small></h2>
+                <div class="col-md-12"><h2>Editor <small>$FILENAME</small>
+                    <button type="button" title="Toggle editor" class="btn btn-default" data-toggle="collapse" data-target="#code-editor"><span class="glyphicon glyphicon-eye-close"></span></button></h2>
                     <div class="collapse in" id="code-editor">
                         <form>
                             <div class="form-group btn-group">
