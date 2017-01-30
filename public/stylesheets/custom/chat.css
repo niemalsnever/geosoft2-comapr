@@ -1,8 +1,10 @@
 ul#chat_content {
     list-style-type: none;
     font-size: small;
+    padding-left: 0;
 }
 .CodeMirror {
     border: 1px solid #eee;
-    height: auto;
+    width: 100% !important;
+    height: 100% !important;
 }
