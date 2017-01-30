@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 var io = require('socket.io')(http);
-
+var socket = require('socket.io')(http);
 
 var index = require('./routes/index');
 //var api = require('./routes/api');
@@ -42,6 +42,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
+//noinspection JSUnusedLocalSymbols
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;

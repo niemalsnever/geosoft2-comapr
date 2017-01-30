@@ -22,10 +22,10 @@ router.get('/', function (req, res) {
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
-        var user;
-        db_functions.getUser(req.user.id, function (err, row) {
-            user = row;
-            res.render('my-projects', { title: 'My Account - ' + user.name + ' (' + user.email + ')', user: user });
+        db_functions.getUserProjects(req.user.id, function (err, rows) {
+            projects = rows;
+            console.log(rows);
+            res.render('my-projects', { rows: projects , user: req.user });
         });
     }
     else {
@@ -98,7 +98,7 @@ router.get('/map-view', function (req, res) {
 //      failureRedirect: '/bad-login' }));
 
 router.post('/login', function(req, res, next) {
-    console.log(req.body);
+    //console.log(req.body);
     //noinspection JSUnusedLocalSymbols
     pp.pass.authenticate('local', function(err, user, info) {
         if (err) {
@@ -141,6 +141,18 @@ router.post('/register', function (req, res) {
     res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ") <br> <a href='/'>Back to login page</a>");
 });
 
+
+router.post('/newProject', function (req, res) {
+    //console.log(req.body);
+    helper.newProject(req.body.projectname, req.user.id);
+    res.redirect("/");
+});
+//FIXME
+router.post('/deleteProject', function(req, res){
+    helper.deleteProject(req.body.projectid);
+    res.redirect("/");
+});
+
 //SAVE from Textarea to R-File
 router.post('/getcode', function(req, res){
  var usercode = req.body.code;
@@ -153,4 +165,5 @@ router.post('/getcode', function(req, res){
      }
    })
  });
+
 module.exports = router;
