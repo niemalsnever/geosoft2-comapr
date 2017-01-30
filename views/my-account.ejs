@@ -15,7 +15,7 @@
 
 <div class="container-fluid" id="content">
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
-    <div class="panel panel-default">
+    <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title"><%= user.name %></h3>
         </div>
@@ -38,24 +38,25 @@
                             <td><%= user.country %></td>
                         </tr>
                         <tr>
-                            <td>Email</td>
+                            <td>E-Mail</td>
                             <td><%=user.email %></td>
                         </tr>
-                        <span class="pull-right">
-                            <a href="/edit" title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
+                        
 
                         </tbody>
+                        
                     </table>
-
+                        <span class="pull-right">
+                            <a title="Edit this user" data-toggle="modal" href="#editUserModal" type="button" class="btn btn-info btn-lg" ><i class="glyphicon glyphicon-edit"></i></a>
+                            <a title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-danger btn-lg"><i class="glyphicon glyphicon-trash"></i></a>
+                        </span>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-
+<%- include('includes/modals.ejs') %>
 <%- include('includes/footer.ejs') %>
 
 </body>
