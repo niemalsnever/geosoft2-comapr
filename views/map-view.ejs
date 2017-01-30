@@ -39,13 +39,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12"><h2>Editor <small>$FILENAME</small></h2>
-                    <div class="collapse in" id="code-editor">
+                <div class="col-md-12"><h2>Editor</h2>
+                <div class="collapse in" id="code-editor">
                         <form>
                             <div class="form-group btn-group">
                                 <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play-circle"></span> Run</button>
-                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save-file"></span> Save</button>
-                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
+                                <button type="button" class="btn btn-default" button onclick="saveTextAsR()" id="save"><span class="glyphicon glyphicon-save-file"></span> Save</button>
+                                <button type="button" class="btn btn-default" button onclick="saveTextAsFile()"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
+                                <button type="button" class="btn btn-default" button onclick="loadFileAsText()"><span class="glyphicon glyphicon-upload"></span> Load R-Script</button>
+                                <input type="text" class="form-control" id='editorname' placeholder="<%= 'File Name' || filename %> ">
                             </div>
                             <div class="form-group">
                                 <textarea id="code" rows="3" cols="138" name="code" title="Code-Editor"></textarea>
@@ -65,7 +67,7 @@
                             <form method="post" enctype="multipart/form-data">
                                 <fieldset>
                                     <ol class="selected-files"></ol>
-                                    <div class="form-group btn-group btn-group-sm">
+                                    <div class="form-group btn-group btn-group">
                                         <label class="btn btn-primary btn-file">
                                             Browse <input type="file" style="display: none;" accept="image/*">
                                         </label>
@@ -136,5 +138,6 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="javascripts/custom/chat_client.js"></script>
+<script src="/javascripts/custom/r-code.js"></script>
 </body>
 </html>
