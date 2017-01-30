@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 
 var helper = require('../bin/etc/helper_functions');
 var pp = require('../bin/etc/passport_setup');
@@ -140,4 +141,16 @@ router.post('/register', function (req, res) {
     res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ") <br> <a href='/'>Back to login page</a>");
 });
 
+//SAVE from Textarea to R-File
+router.post('/getcode', function(req, res){
+ var usercode = req.body.code;
+ var newname = req.body.newname + '.r';
+ fs.writeFile(newname, usercode, function(err) {
+     if (err) {
+       res.send('Something when wrong');
+     } else {
+       res.send('Saved!');
+     }
+   })
+ });
 module.exports = router;
