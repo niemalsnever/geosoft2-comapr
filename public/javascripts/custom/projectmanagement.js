@@ -17,7 +17,7 @@ function newProject(name)
         url: '/newProject',
         type: 'POST',
         data: {
-            'projectname': name,
+            'projectname': name
         }
     })
 }
