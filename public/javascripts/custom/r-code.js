@@ -21,19 +21,19 @@ function destroyClickedElement(event) {
     document.body.removeChild(event.target);
 }
 
+//noinspection JSUnusedGlobalSymbols
 function loadFileAsText() {
     var fileToLoad = document.getElementById("fileToLoad").files[0];
 
     var fileReader = new FileReader();
     fileReader.onload = function(fileLoadedEvent) {
-        var textFromFileLoaded = fileLoadedEvent.target.result;
-        document.getElementById("editor").value = textFromFileLoaded;
+        document.getElementById("editor").value = fileLoadedEvent.target.result;
     };
     fileReader.readAsText(fileToLoad, "UTF-8");
 }
 
 
-//Save from Textarea to R-File
+//Save from Textarea to R-File on Server
 function saveTextAsR() {
         console.log('Hier bin ich!');
         var content = editor.getValue();
