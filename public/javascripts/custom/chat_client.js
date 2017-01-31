@@ -26,18 +26,26 @@ $(document).ready(function(){
         // Eingabefelder auslesen
         var name = $('#name').val();
         var text = $('#text').val();
-        // Socket senden
-        socket.emit('chat', { name: name, text: text });
-        // Text-Eingabe leeren
-        $('#text').val('');
-    }
-    // bei einem Klick
-    $('#send').click(send);
-    // oder mit der Enter-Taste
-    $('#text').keypress(function (e) {
-        if (e.which == 13) {
-            send();
+
+        if (text && name) {
+            // Socket senden
+            socket.emit('chat', {name: name, text: text});
+            // Text-Eingabe leeren
+            $('#text').val('');
         }
+    }
+
+    $(document).ready(function () {
+        // bei einem Klick
+        $('#send').on("click", function () {
+            send();
+        });
+        // oder mit der Enter-Taste
+        $('#text').on('keypress', function (e) {
+            if (e.which == 13) {
+                send();
+            }
+        });
     });
 });
 
