@@ -1,20 +1,19 @@
 //Function to save R-File from Textarea locally
 function saveTextAsFile() {
-    var textToSave = document.getElementById("editor").value;
+    var textToSave = editor.getValue();
     var textToSaveAsBlob = new Blob([textToSave], {
-        type: "text/.R"
+        type: "text/R"
     });
     var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+    var fileNameToSaveAs =  $('#editorname')[0].value || 'currentEditorContent';
 
     var downloadLink = document.createElement("a");
-    downloadLink.download = fileNameToSaveAs;
+    downloadLink.download = fileNameToSaveAs + '.r';
     downloadLink.innerHTML = "Download File";
     downloadLink.href = textToSaveAsURL;
     downloadLink.onclick = destroyClickedElement;
     downloadLink.style.display = "none";
     document.body.appendChild(downloadLink);
-
     downloadLink.click();
 }
 
@@ -47,8 +46,8 @@ function saveTextAsR() {
               'newname' : filename,
                 'code': content
             },
-            processData: 'false',
+            processData: 'false'
         });
         event.preventDefault();
         return false;
-};
+}

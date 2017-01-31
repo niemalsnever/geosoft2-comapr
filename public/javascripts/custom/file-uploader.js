@@ -6,8 +6,14 @@ $(document).on('change', ':file', function() {
 });
 $(document).ready( function() {
     $(':file').on('fileselect', function(event, numFiles, label) {
-        for(i=0; i<numFiles; i++) {
-            $('ol.selected-files').append('<li>' + label + "</li>");
+
+        var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+        if( input.length ) {
+            input.val(log);
+        } else {
+            if( log ) alert(log);
         }
 
     });

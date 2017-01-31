@@ -21,34 +21,45 @@
 
 <div class="container-fluid" id="content">
     <div class="row">
-        <div class="col-md-9 col-lg-10">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="btn-group btn-group-xs">
-                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mapcontainer">Toggle Map</button>
-                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#code-editor">Toggle Editor</button>
-                    </div>
+        <div class="col-md-12">
+            <div id="toolbar">
+                <div class="btn-group btn-group-xs pull-right">
+                    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mapcontainer"><span class="glyphicon glyphicon-eye-close"></span> Map</button>
+                    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#code-editor"><span class="glyphicon glyphicon-eye-close"></span> Editor</button>
+                    <button type="button" class="btn btn-default" onclick="toggleSidebar()"><span class="glyphicon glyphicon-eye-close"></span> Sidebar</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-lg-10" id="main">
             <div class="row">
-                <div class="col-md-12">
-                    <h2 style="text-transform: uppercase;">Map <small>$PROJECTNAME</small></h2>
-                    <div class="collapse in" id="mapcontainer">
+                <div class="col-md-12 collapse in" id="mapcontainer">
+                    <h2 style="text-transform: uppercase;">Map <small>$PROJECTNAME</small>
+                        <!--<button type="button" title="Toggle map" class="btn btn-default" data-toggle="collapse" data-target="#mapcontainer"><span class="glyphicon glyphicon-eye-close"></span></button>--></h2>
+                    <div>
                         <div id="mapid" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative;"></div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12"><h2>Editor</h2>
-                <div class="collapse in" id="code-editor">
+                <div class="col-md-12 collapse in" id="code-editor"><h2 style="text-transform: uppercase;">Editor <!--<button type="button" title="Toggle editor" class="btn btn-default" data-toggle="collapse" data-target="#code-editor"><span class="glyphicon glyphicon-eye-close"></span></button>--></h2>
+                    <div class="">
                         <form>
-                            <div class="form-group btn-group">
+                            <div class="btn-group">
                                 <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play-circle"></span> Run</button>
-                                <button type="button" class="btn btn-default" button onclick="saveTextAsR()" id="save"><span class="glyphicon glyphicon-save-file"></span> Save</button>
-                                <button type="button" class="btn btn-default" button onclick="saveTextAsFile()"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
-                                <button type="button" class="btn btn-default" button onclick="loadFileAsText()"><span class="glyphicon glyphicon-upload"></span> Load R-Script</button>
-                                <input type="text" class="form-control" id='editorname' placeholder="<%= 'File Name' || filename %> ">
+                                <!--<button type="button" class="btn btn-default" button onclick="loadFileAsText()"><span class="glyphicon glyphicon-upload"></span> Load R-Script</button>-->
                             </div>
+                            <div class="btn-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id='editorname' placeholder="<%= 'File Name' || filename %> ">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" button onclick="saveTextAsR()" id="save" title="Save your file on the server"><span class="glyphicon glyphicon-save-file"></span> Save</button>
+                                        <button type="button" class="btn btn-default" button onclick="saveTextAsFile()" title="Save your file locally"><span class="glyphicon glyphicon-share-alt"></span> Export</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <p></p>
                             <div class="form-group">
                                 <textarea id="code" rows="3" cols="138" name="code" title="Code-Editor"></textarea>
                             </div>
@@ -57,28 +68,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-lg-2">
+        <div class="col-md-3 col-lg-2" id="sidebar">
             <div class="row">
-                <p></p><div id="tree">
-                </div>
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="tree"></div>
                             <!--<a class="btn btn-default" href="#" role="button">View details »</a>-->
-                    <form method="post" enctype="multipart/form-data">
-                        <fieldset>
-                            <ol class="selected-files"></ol>
-                            <div class="form-group btn-groupbtn-group">
-                                <label class="btn btn-primary btn-file">
-                                    <span class="glyphicon glyphicon-globe"></span>Browse <input type="file" style="display: none;" accept="image/*">
-                                </label>
-                                <button type="button" class="btn btn-default ">
-                                    <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload
-                                </button>
-                            </div>
-                        </fieldset>
-                    </form>
+                            <form method="post" enctype="multipart/form-data">
+                                <fieldset>
+                                    <ol class="selected-files"></ol>
+                                    <div class="input-group">
+                                        <span class="input-group-btn"><label class="btn btn-default btn-file">Browse&hellip;<input type="file" multiple accept="image/*" style="display: none;"></label></span>
+
+                                        <input type="text" class="form-control" readonly>
+                                        <span class="input-group-btn"><button class="btn btn-success" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button></span>
+                                    </div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -99,6 +106,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             <!--<div class="col-md-12"><textarea type="textbox" id="output" rows = "10" cols = "30"></textarea></div>-->
         </div>
@@ -141,5 +149,48 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="javascripts/custom/chat_client.js"></script>
 <script src="/javascripts/custom/r-code.js"></script>
+
+<script>
+    var sbShown = true;
+    function toggleSidebar() {
+        if(sbShown == true) {
+            $('#sidebar').fadeToggle(800, function () {
+                $('#main').removeClass('col-md-9');
+                $('#main').removeClass('col-lg-10');
+                $('#main').addClass('col-md-12');
+                $('#main').addClass('col-lg-12');
+                mymap.invalidateSize();
+                sbShown = false;
+            });
+        } else {
+            $('#main').removeClass('col-md-12');
+            $('#main').removeClass('col-lg-12');
+            $('#main').addClass('col-md-9');
+            $('#main').addClass('col-lg-10');
+            mymap.invalidateSize();
+            $('#sidebar').fadeToggle(800);
+            sbShown = true;
+        };
+    }
+
+    $('#code-editor').on('hidden.bs.collapse', function () {
+        if (!sbShown) {
+            $('#mapcontainer h2').fadeOut();
+        }
+        $('#mapid').animate({ 'height': "+=35rem" }, function () {
+            mymap.invalidateSize();
+        });
+    })
+    $('#code-editor').on('show.bs.collapse', function () {
+        if (sbShown) {
+            $('#mapcontainer h2').fadeIn();
+        }
+        $('#mapid').animate({ 'height': "-=35rem" }, function () {
+            mymap.invalidateSize();
+        });
+    })
+
+</script>
+
 </body>
 </html>
