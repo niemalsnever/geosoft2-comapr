@@ -37,8 +37,9 @@
                              <% for(i = 0; i < rows.length; i++) { %>
                             <tr>
                                 <form action="/deleteProject" method= "post">
-                                    <td><a href="/map-view"><%= rows[i].projectname %></a>
-                                        <span class="pull-right">
+                                    <!-- FIXME-->
+                                    <td><a href='/map-view?<%='/getProjectID='+projects.id%>'><%= rows[i].projectname %></a>
+                                        <span class='pull-right'>
                                             <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-info"><i class="glyphicon glyphicon-share"></i> Invite User</a>
                                             <!-- FIXME -->
                                             <a data-original-title="Remove this project" data-toggle="tooltip" onclick="deleteProject(<%= rows[i].projectid %>); window.location.reload()"

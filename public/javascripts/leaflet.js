@@ -3,12 +3,36 @@
 var coordinates = [];
 //.fromTextArea(document.getElementById("output"), {});
 var mymap = L.map('mapid').setView([51.9606649, 7.6161347], 13);
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+
+var mapboxURL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
+var token = 'pk.eyJ1IjoiaG9lbHNjaCIsImEiOiJxblpwakZrIn0.JTTnLszkIJB11k8YEe7raQ';
+
+var streets = L.tileLayer(mapboxURL, {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
-    id: 'hoelsch.e2b0812b',
-    accessToken: 'pk.eyJ1IjoiaG9lbHNjaCIsImEiOiJxblpwakZrIn0.JTTnLszkIJB11k8YEe7raQ'
-}).addTo(mymap);
+    id: 'mapbox.streets',
+    accessToken: token
+}).addTo(mymap), 
+    outdoors = L.tileLayer(mapboxURL, {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.outdoors',
+    accessToken: token
+}),
+    satellite = L.tileLayer(mapboxURL, {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.satellite',
+    accessToken: token
+});
+
+var baseLayers = {
+		"Streets": streets,
+        "Outdoors": outdoors,
+        "Satellite": satellite
+	};
+L.control.layers(baseLayers).addTo(mymap);
+
 var drawnItems = new L.FeatureGroup();
 
 mymap.addLayer(drawnItems);

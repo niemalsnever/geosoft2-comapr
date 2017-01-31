@@ -23,13 +23,19 @@ module.exports = {
             db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
         }
         catch(err){
-            console.log("adsf");
+            console.log("asdf");
         }
     },
     deleteProject: function(id){
         db.run("DELETE from Projects where id = ?;", id);
         window.location.reload();
     },
+    
+    //FIXME
+    getUserProjects: function(){
+        db.run('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects;');
+    }
+    ,
     // TODO: This is not working and might be removed
     ensureAuthenticated: function (req, res, next) {
         req.session.returnTo = req.path;

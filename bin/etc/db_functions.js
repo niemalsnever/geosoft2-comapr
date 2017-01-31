@@ -15,19 +15,29 @@ module.exports = {
     ,
     getUserProjects : function(id, callback){
         db.serialize(function() {
-            db.all('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?', id, id, function(err, rows)
+            db.all('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?;', id, id, function(err, rows)
                   {
                 callback(err, rows);
             });
         })
     }
     ,
-    // FIXME
     
     deleteProject : function(id, callback){
         db.run('delete from Projects where Projects.id = ?', id ,function(err, result)
               {
             callback (err, result);
+        });
+    }
+
+    ,
+ // FIXME
+    getProjectID : function(callback){
+        db.serialize(function(){
+            db.get('SELECT Projects.id AS projectID, Projects.name AS projectName FROM Projects;', function(err, row){
+                callback(err,row);
+                
+            });
         })
     }
-};
+}
