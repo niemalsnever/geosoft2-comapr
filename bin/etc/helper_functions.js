@@ -23,6 +23,7 @@ module.exports = {
     },
     deleteProject: function(id){
         db.run("DELETE from Projects where id = ?;", id);
+        window.location.reload();
     },
     // TODO: This is not working and might be removed
     ensureAuthenticated: function (req, res, next) {

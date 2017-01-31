@@ -23,6 +23,9 @@
             <table class="table table-user-information">
                 <tbody>
                 <header><b>My Projects</b></header>
+                    <span class="pull-right">
+                            <a title="New Project" data-toggle="modal" href="#newProjectModal" type="button" class="btn btn-success btn-lg" ><i class="glyphicon glyphicon-plus"></i></a>
+                        </span>
                 <% for(i = 0; i < rows.length; i++) { %>
                 <tr>
                     <form action="/deleteProject" method= "post">
@@ -43,6 +46,7 @@
 </div>
 
 <%- include('includes/footer.ejs') %>
+<%- include('includes/modals.ejs') %>
 <!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
 <script src="javascripts/custom/projectmanagement.js"></script>
 <!-- DO NOT EDIT AFTER THIS LINE -->

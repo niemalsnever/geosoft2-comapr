@@ -9,3 +9,16 @@ function deleteProject(id)
         }
     })
 }
+function newProject(name, ownerid)
+{
+    console.log('adsf');
+    $.ajax({
+        
+        url: '/newProject',
+        type: 'POST',
+        data: {
+            'name': name,
+            'ownerid': ownerid
+        }
+    })
+}

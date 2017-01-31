@@ -28,6 +28,7 @@ module.exports = {
         db.run('delete from Projects where Projects.id = ?', id ,function(err, result)
               {
             callback (err, result);
-        });
+        })
+        window.location.reload();
     }
 };

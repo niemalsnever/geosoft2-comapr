@@ -11,9 +11,8 @@
                     <table class="table table-newproject-modal">
                         <tr>
                             <td>Name</td>
-                            <td><input type="text" placeholder="The name of your project" class="form-control" name= "projectname"></td>
+                            <td><input type="text" placeholder="The name of your project" class="form-control" name="projectname" id="project-name"></td>
                         </tr>
-
                         <tr>
                             <td>Share with</td>
                             <td><input type="text" placeholder="E-mail addresses of the other contributors" class="form-control"></td>
@@ -21,7 +20,7 @@
                 </div>
                 <div class="modal-footer">
                     <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-lg" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></a>
-                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-lg" data-dismiss="modal"><i class="glyphicon glyphicon-plus"></i></a>
+                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick ="newProject($('#project-name'))"><i class="glyphicon glyphicon-plus"></i></a>
                 </div>
             </form>
         </div>
