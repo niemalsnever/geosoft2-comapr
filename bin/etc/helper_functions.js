@@ -32,7 +32,7 @@ module.exports = {
     },
     
     //FIXME
-    getUserProjects: function(){
+    getProjectID: function(){
         db.run('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects;');
     }
     ,
