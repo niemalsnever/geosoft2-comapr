@@ -19,7 +19,12 @@ module.exports = {
         db.run("INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, ?);", name, email, city, country, hash, now);
     },
     newProject: function (name, ownerid) {
-        db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
+        try{
+            db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
+        }
+        catch(err){
+            console.log("adsf");
+        }
     },
     deleteProject: function(id){
         db.run("DELETE from Projects where id = ?;", id);

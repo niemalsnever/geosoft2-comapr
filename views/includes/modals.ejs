@@ -19,8 +19,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-lg" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></a>
-                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick ="newProject($('#project-name'))"><i class="glyphicon glyphicon-plus"></i></a>
+                    <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
+                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val()); window.location.reload()"><i class="glyphicon glyphicon-ok"></i> New Project</a>
                 </div>
             </form>
         </div>

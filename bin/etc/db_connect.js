@@ -5,7 +5,7 @@
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('comapr.db', function () {
     //noinspection ConstantIfStatementJS
-    if(false) {
+    if(true) {
         console.log("Connected to database");
         db.on('trace', function (trace) {
             console.log(trace);

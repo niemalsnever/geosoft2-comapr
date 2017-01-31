@@ -29,6 +29,5 @@ module.exports = {
               {
             callback (err, result);
         })
-        window.location.reload();
     }
 };
