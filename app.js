@@ -32,7 +32,13 @@ app.use('/', index);
 //app.use('/api', api);
 app.use('/TEMPLATE', template_view);
 
+app.get('/my-projects', function(req,res){
+    res.send('projectID: '+ req.query.projects.id);
+});
 
+app.get('/my-account', function(req,res){
+    res.send('userID: '+ req.query.users.id);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,7 +46,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
 // error handler
 //noinspection JSUnusedLocalSymbols
 app.use(function (err, req, res, next) {

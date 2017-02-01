@@ -28,9 +28,10 @@ module.exports = {
     },
     deleteProject: function(id){
         db.run("DELETE from Projects where id = ?;", id);
-        window.location.reload();
     },
-    
+    deleteUser: function(id){
+        db.run("DELETE from Users where id = ?;", id);
+    },
     //FIXME
     getProjectID: function(){
         db.run('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects;');

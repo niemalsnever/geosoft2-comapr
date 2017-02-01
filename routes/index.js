@@ -18,7 +18,9 @@ router.get('/', function (req, res) {
         res.redirect('/my-projects');
     }
 });
-
+router.get('/sign-up', function (req, res) {
+        res.render('index', { title: 'Login' });
+});
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
@@ -132,7 +134,7 @@ router.get('/good-login', function (req, res) {
 
 router.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/');
+    res.redirect('/sign-up');
 });
 
 router.post('/register', function (req, res) {
@@ -152,6 +154,13 @@ router.post('/deleteProject', function(req, res){
     helper.deleteProject(req.body.projectid);
     res.redirect("/");
 });
+
+router.post('/deleteUser', function(req,res){
+    req.body.rto="";
+    req.logout();
+    helper.deleteUser(req.body.userID);
+    res.send("User successfully deleted");
+    });
 
 //SAVE from Textarea to R-File
 router.post('/getcode', function(req, res){

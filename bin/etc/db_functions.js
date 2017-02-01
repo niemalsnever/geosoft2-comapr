@@ -31,6 +31,14 @@ module.exports = {
     }
 
     ,
+    deleteUser : function(id, callback){
+        db.run('delete from Users where Users.id = ?', id ,function(err, result)
+              {
+            callback (err, result);
+        });
+    }
+    ,
+    
  // FIXME
     getProjectID : function(callback){
         db.serialize(function(){
