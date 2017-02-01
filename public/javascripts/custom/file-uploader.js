@@ -24,18 +24,19 @@ $('#uploadButton').on('click', function () {
 });
 
 function uploadFile() {
-    var uploadForm = $(':file')[0];
+    var file = $('#file-input-form')[0].files[0];
+    console.log(file);
     var formdata = new FormData();
 
-    for (var i = 0; i<uploadForm.files.length; i++) {
-        formdata.append('file' + i, uploadForm.files[i]);
-    }
+    formdata.append("file", file);
+
+    console.log(formdata);
 
     $.ajax({
         type: "POST",
-        data: uploadForm.files[0],
+        data: formdata,
         processData: false,
-        contentType: 'multipart/form-data',
+        contentType: false,
         url: '/api/fileUpload',
         timeout: 10000,
         success: function(data, textStatus){

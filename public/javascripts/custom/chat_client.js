@@ -55,6 +55,6 @@ socket.on("chat", function(data, msg) {
     $("#msgs").append("<li><strong><span class='text-success'>" + data.name + "</span></strong>: " + msg + "</li>");
     //clear typing field
     $("#"+data.name+"").remove();
-    clearTimeout(timeout);
-    timeout = setTimeout(timeoutFunction, 0);
+    //clearTimeout(timeout);
+    //timeout = setTimeout(timeoutFunction, 0);
 });

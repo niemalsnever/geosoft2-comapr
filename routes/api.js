@@ -5,22 +5,22 @@
 var fs = require('fs');
 var express = require('express');
 var router = express.Router();
-var bodyParser =    require("body-parser");
+var bodyParser = require("body-parser");
 router.use(bodyParser.json());
-var multer  =   require('multer');
+var multiparty = require("multiparty");
 var helper = require('../bin/etc/db_functions.js');
+var util = require('util');
 
 
-
-var storage =   multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './uploads');
-    },
-    filename: function (req, file, callback) {
-        callback(null, file.fieldname);
-    }
-});
-var upload = multer( { storage : storage } ).array('files',5);
+// var storage =   multer.diskStorage({
+//     destination: function (req, file, callback) {
+//         callback(null, './uploads');
+//     },
+//     filename: function (req, file, callback) {
+//         callback(null, file.fieldname);
+//     }
+// });
+// var upload = multer( { storage : storage } ).array('files',5);
 
 router.post('/registerUser', function (req, res) {
     //console.log(req.body);
@@ -54,14 +54,13 @@ router.post('/saveCode', function(req, res){
 });
 
 router.post('/fileUpload', function (req, res) {
-    console.log(req.body);
-    console.log(req.files);
-    upload(req, res, function (err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        res.end("File is uploaded");
-    })
+    var form = new multiparty.Form();
+
+    form.parse(req, function(err, fields,  files) {
+
+         console.log(fields);
+         res.end('meh');
+    });
 });
 
 module.exports = router;
