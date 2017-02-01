@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
-var helper = require('../bin/etc/helper_functions');
 var pp = require('../bin/etc/passport_setup');
 var db_functions = require('../bin/etc/db_functions');
 pp.passport_setup();
@@ -93,28 +92,32 @@ router.get('/map-view', function (req, res) {
     }
 });
 
-// router.post('/login', pp.pass.authenticate('local', {
-//      successRedirect: /good-login,
-//      failureRedirect: '/bad-login' }));
+/*
+
+router.post('/login', pp.pass.authenticate('local', {
+      successRedirect: '/good-login',
+      failureRedirect: '/bad-login' }));
+*/
+
 
 router.post('/login', function(req, res, next) {
-    //console.log(req.body);
-    //noinspection JSUnusedLocalSymbols
-    pp.pass.authenticate('local', function(err, user, info) {
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            return res.redirect('/');
-        }
-        req.logIn(user, function(err) {
-            if (err) {
-                return next(err);
-            }
-            return res.redirect(req.body.rto || '/');
-        });
-    })(req, res, next);
-});
+     console.log(req.body);
+     //noinspection JSUnusedLocalSymbols
+     pp.pass.authenticate('local', function(err, user, info) {
+         if (err) {
+             return next(err);
+         }
+         if (!user) {
+             return res.redirect('/');
+         }
+         req.logIn(user, function(err) {
+             if (err) {
+                 return next(err);
+             }
+             return res.send(req.body.rto || '/');
+         });
+     })(req, res, next);
+ });
 
 router.get('/good-login', function (req, res) {
     //console.log(req);
@@ -134,36 +137,5 @@ router.get('/logout', function(req, res){
     req.logout();
     res.redirect('/');
 });
-
-router.post('/register', function (req, res) {
-    //console.log(req.body);
-    helper.registerUser(req.body.regName, req.body.regEmail, req.body.regCity, req.body.regCountry, req.body.regPassword);
-    res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ") <br> <a href='/'>Back to login page</a>");
-});
-
-
-router.post('/newProject', function (req, res) {
-    //console.log(req.body);
-    helper.newProject(req.body.projectname, req.user.id);
-    res.redirect("/");
-});
-//FIXME
-router.post('/deleteProject', function(req, res){
-    helper.deleteProject(req.body.projectid);
-    res.redirect("/");
-});
-
-//SAVE from Textarea to R-File
-router.post('/getcode', function(req, res){
- var usercode = req.body.code;
- var newname = req.body.newname + '.r';
- fs.writeFile(newname, usercode, function(err) {
-     if (err) {
-       res.send('Something when wrong');
-     } else {
-       res.send('Saved!');
-     }
-   })
- });
 
 module.exports = router;

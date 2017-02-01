@@ -18,3 +18,31 @@ $(document).ready( function() {
 
     });
 });
+
+$('#uploadButton').on('click', function () {
+    uploadFile();
+});
+
+function uploadFile() {
+    var uploadForm = $(':file')[0];
+    var formdata = new FormData();
+
+    for (var i = 0; i<uploadForm.files.length; i++) {
+        formdata.append('file' + i, uploadForm.files[i]);
+    }
+
+    $.ajax({
+        type: "POST",
+        data: uploadForm.files[0],
+        processData: false,
+        contentType: 'multipart/form-data',
+        url: '/api/fileUpload',
+        timeout: 10000,
+        success: function(data, textStatus){
+            console.log("successfully saved");
+        },
+        error: function(xhr, textStatus, errorThrown){
+            console.log("saving failed");
+        }
+    })
+}

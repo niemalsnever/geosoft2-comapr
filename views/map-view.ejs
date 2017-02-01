@@ -75,14 +75,14 @@
                         <div class="panel-body">
                             <div id="tree"></div>
                             <!--<a class="btn btn-default" href="#" role="button">View details »</a>-->
-                            <form method="post" enctype="multipart/form-data">
+                            <form>
                                 <fieldset>
                                     <ol class="selected-files"></ol>
                                     <div class="input-group">
-                                        <span class="input-group-btn"><label class="btn btn-default btn-file">Browse&hellip;<input type="file" multiple accept="image/*" style="display: none;"></label></span>
+                                        <span class="input-group-btn"><label class="btn btn-default btn-file"><i class="glyphicon glyphicon-hdd"></i><input type="file" multiple accept="image/*" style="display: none;"></label></span>
 
                                         <input type="text" class="form-control" readonly>
-                                        <span class="input-group-btn"><button class="btn btn-success" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button></span>
+                                        <span class="input-group-btn"><button class="btn btn-success" type="button" id="uploadButton"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button></span>
                                     </div>
                                 </fieldset>
                             </form>

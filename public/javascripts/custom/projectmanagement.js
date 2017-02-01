@@ -2,7 +2,7 @@
 function deleteProject(id)
 {
     $.ajax({
-        url: '/deleteProject',
+        url: '/api/deleteProject',
         type: 'POST',
         data: {
             'projectid': id
@@ -13,8 +13,7 @@ function newProject(name)
 {
     console.log('adsf');
     $.ajax({
-        
-        url: '/newProject',
+        url: '/api/newProject',
         type: 'POST',
         data: {
             'projectname': name

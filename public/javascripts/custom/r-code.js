@@ -25,10 +25,10 @@ function destroyClickedElement(event) {
 function saveTextAsR() {
         console.log('Hier bin ich!');
         var content = editor.getValue();
-        var filename = $('#editorname')[0].value;
+        var filename = $('#editorname')[0].value || $('#editorname').placeholder;
         console.log("This is content: " + content);
         $.ajax({
-            url: '/getcode',
+            url: '/api/saveCode',
             type: 'POST',
             data: {
               'newname' : filename,
