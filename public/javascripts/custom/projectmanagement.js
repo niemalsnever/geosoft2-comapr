@@ -9,15 +9,17 @@ function deleteProject(id)
         }
     })
 }
-function newProject(name)
-{
+function newProject(name) {
     console.log('adsf');
     $.ajax({
-        
         url: '/newProject',
         type: 'POST',
         data: {
             'projectname': name
+        },
+        success: function(){
+            setTimeout(function(){window.location.href="/my-projects"},
+                200);
         }
     })
 }

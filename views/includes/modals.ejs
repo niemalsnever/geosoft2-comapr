@@ -22,7 +22,7 @@
                 </div>
                 <div class="modal-footer">
                     <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
-                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val()); window.location.reload()"><i class="glyphicon glyphicon-ok"></i> New Project</a>
+                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val());"><i class="glyphicon glyphicon-ok"></i> New Project</a>
 
                 </div>
             </form>
@@ -58,13 +58,13 @@
 
                                             <tr>
                                                 <td>Name</td>
-                                                <td><input type="text" value="<%= user.name %>"
+                                                <td><input type="text" id="editname" value="<%= user.name %>"
                                                            class="form-control"></td>
                                             </tr>
 
                                             <tr>
                                                 <td>City</td>
-                                                <td><input type="text" value="<%= user.city %>"
+                                                <td><input type="text" id="editcity" value="<%= user.city %>"
                                                            class="form-control"></td>
                                             </tr>
 
@@ -75,7 +75,7 @@
 
                                             <tr>
                                                 <td>E-Mail</td>
-                                                <td><input type="text" value="<%= user.email %>"
+                                                <td><input type="text" id="editemail" value="<%= user.email %>"
                                                            class="form-control"></td>
                                             </tr>
                                             </tbody>
@@ -94,7 +94,7 @@
                         <div class="pull-right">
                             <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-lg"
                                data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></a>
-                            <a title="Save changes" data-toggle="tooltip" type="button"
+                            <a title="Save changes" data-toggle="tooltip" onclick ="editUser()" type="button"
                                class="btn btn-success btn-lg"><i class="glyphicon glyphicon-floppy-disk"></i></a>
                         </div>
                     </div>
@@ -124,3 +124,5 @@
 
     </div>
 </div>
+<script src="javascripts/custom/projectmanagement.js"></script>
+<script src="javascripts/custom/usermanagement.js"></script>

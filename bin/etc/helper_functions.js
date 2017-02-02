@@ -37,6 +37,12 @@ module.exports = {
         db.run('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects;');
     }
     ,
+    //FIXME
+    editUser : function (name, email, city, country, id) {
+        var now = Date.now().toString();
+        db.run("UPDATE Users Set name=?, email=?, city=?, country=?  WHERE id=?;", name, email, city, country, id);
+    }
+    ,
     // TODO: This is not working and might be removed
     ensureAuthenticated: function (req, res, next) {
         req.session.returnTo = req.path;
