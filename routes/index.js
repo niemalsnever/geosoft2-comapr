@@ -5,6 +5,7 @@ var helper = require('../bin/etc/helper_functions');
 var pp = require('../bin/etc/passport_setup');
 var db_functions = require('../bin/etc/db_functions');
 
+
 pp.passport_setup();
 
 router.use(pp.pass.initialize());
@@ -147,7 +148,7 @@ router.post('/register', function (req, res) {
 router.post('/newProject', function (req, res) {
     //console.log(req.body);
     helper.newProject(req.body.projectname, req.user.id);
-    fs.mkdir('./public/'+req.body.projectname,0777, function(err){
+    fs.mkdir('./data/'+req.body.projectname,0777, function(err){
         if(err){
             return console.error(err);
         }
@@ -189,6 +190,5 @@ router.post('/getcode', function(req, res){
 
 router.post('/projectID', function(req, res){
     helper.projectID(req.body.projectsID);
-    res.writeHead(200);
 })
 module.exports = router;
