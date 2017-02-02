@@ -31,10 +31,9 @@ module.exports = {
         db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
     },
     deleteProject : function(id, callback){
-        db.run('delete from Projects where Projects.id = ?', id ,function(err, result)
+        db.run('delete from Projects where Projects.id = ?', id , function(err, result)
               {
             callback (err, result);
         });
-        window.location.reload();
     }
 };

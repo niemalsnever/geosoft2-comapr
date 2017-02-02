@@ -50,8 +50,13 @@ router.post('/newProject', function (req, res) {
 });
 //FIXME
 router.post('/deleteProject', function(req, res){
-    helper.deleteProject(req.body.projectid);
-    res.redirect("/");
+    helper.deleteProject(req.body.projectid, function (err, row) {
+        if(err) {
+            res.send(err);
+        } else {
+            res.send('success');
+        }
+    });
 });
 
 //SAVE from Textarea to R-File
