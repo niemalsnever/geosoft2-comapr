@@ -24,20 +24,17 @@ $('#uploadButton').on('click', function () {
 });
 
 function uploadFile() {
-    var file = $('#file-input-form')[0].files[0];
-    console.log(file);
-    var formdata = new FormData();
-
-    formdata.append("file", file);
+    var form = document.getElementById('file-upload-form');
+    var formdata = new FormData(form);
 
     console.log(formdata);
 
     $.ajax({
         type: "POST",
         data: formdata,
+        url: '/api/fileUpload',
         processData: false,
         contentType: false,
-        url: '/api/fileUpload',
         timeout: 10000,
         success: function(data, textStatus){
             console.log("successfully saved");
