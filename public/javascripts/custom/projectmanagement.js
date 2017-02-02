@@ -1,11 +1,13 @@
 
-function deleteProject(id)
+function deleteProject(id, projectname)
+
 {
     $.ajax({
         url: '/deleteProject',
         type: 'POST',
         data: {
-            'projectid': id
+            'projectid': id,
+            'projectname' : projectname
         }
     })
 }

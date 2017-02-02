@@ -159,9 +159,26 @@ router.post('/newProject', function (req, res) {
 
 router.post('/deleteProject', function(req, res){
     helper.deleteProject(req.body.projectid);
+    try{
+    fs.rmdir('./data/'+req.body.projectname,function(err){
+        
+        console.log("deleted directory");
+    });}
+    catch(err) {
+        console.log(err);
+    }
+
     res.redirect("/");
 });
 
+/*router.post('/deleteDirectory', function(req,res){
+    helper.deleteDirectory(req.body.projectname);
+    fs.unlink('./data/'+req.body.projectname,function(err){
+        if (err) throw err;
+        console.log("deleted directory");
+    });
+});
+*/
 router.post('/deleteUser', function(req,res){
     req.body.rto="";
     req.logout();

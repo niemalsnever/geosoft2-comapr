@@ -28,8 +28,12 @@ module.exports = {
               {
             callback (err, result);
         });
+    },
+    deleteDirectory : function(name, callback){
+        db.run('delete from Projects where projects.name = ?', id, function(err,result){
+            callback(err,result);
+        });
     }
-
     ,
     deleteUser : function(id, callback){
         db.run('delete from Users where Users.id = ?', id ,function(err, result)
