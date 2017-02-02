@@ -13,34 +13,6 @@ var util = require('util');
 
 var formidable = require('formidable');
 
-/*
-var multer = require('multer');
-
-
-
-var upload = multer({
-    dest: 'uploads/'
-});
-
-var uploadedFile = upload.fields([{
-    name: 'file-upload',
-    maxCount: 1
-}]);
-*/
-
-
-
-// var storage =   multer.diskStorage({
-//      destination: function (req, file, callback) {
-//          callback(null, '/uploads');
-//      },
-//      filename: function (req, file, callback) {
-//          callback(null, file.fieldname);
-//      }
-//  });
-//
-// var uploadedFile = multer( { storage : storage } ).single();
-
 
 //FIXME: Check for Database Errors!
 router.post('/registerUser', function (req, res) {
@@ -104,6 +76,7 @@ router.post('/saveCode', function(req, res){
     })
 });
 
+//TODO: This needs some polish
 router.post('/fileUpload', function (req, res) {
     var form = new formidable.IncomingForm();
 
@@ -129,15 +102,7 @@ router.post('/fileUpload', function (req, res) {
 
     // parse the incoming request containing the form data
     form.parse(req);
-})
-
-
-/*
-//FIXME: This is not working at all!
-router.post('/fileUpload', uploadedFile, function (req, res) {
-    res.send('meh');
 });
-*/
 
 
 module.exports = router;

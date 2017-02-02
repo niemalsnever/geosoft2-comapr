@@ -42,6 +42,7 @@ function uploadFile() {
         timeout: 10000,
         success: function(data, textStatus){
             console.log("successfully saved");
+            //TODO: Trigger Data Tree Update
         },
         error: function(xhr, textStatus, errorThrown){
             console.log("saving failed");
