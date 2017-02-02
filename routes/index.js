@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+
 var helper = require('../bin/etc/helper_functions');
 var pp = require('../bin/etc/passport_setup');
 var db_functions = require('../bin/etc/db_functions');
-
 
 pp.passport_setup();
 
@@ -156,6 +156,7 @@ router.post('/newProject', function (req, res) {
     })
     res.redirect("/");
 });
+
 router.post('/deleteProject', function(req, res){
     helper.deleteProject(req.body.projectid);
     res.redirect("/");
@@ -170,7 +171,7 @@ router.post('/deleteUser', function(req,res){
 
 //FIXME
 router.post('/editUser', function(req,res){
-    helper.editUser(req.body.name, req.body.email, req.body.city, req.body.country, req.body.id);
+    helper.editUser(req.body.username, req.body.email, req.body.city, req.body.country, req.user.id);
     res.send("User successfully edited");
     res.send("/");
 })
@@ -188,7 +189,4 @@ router.post('/getcode', function(req, res){
    })
  });
 
-router.post('/projectID', function(req, res){
-    helper.projectID(req.body.projectsID);
-})
 module.exports = router;

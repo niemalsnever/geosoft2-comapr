@@ -1,4 +1,3 @@
-
 function deleteUser(id)
 {
     $.ajax({
@@ -14,16 +13,18 @@ function deleteUser(id)
    
 }
 //FUCKING FIXME
-function editUser(name, city, country, email){
+function editUser(){
+    data = {
+        'username': $('#editname').val(),
+            'email' :   $('#editemail').val(),
+            'city': $('#editcity').val(),
+            'country': $('#regCountryInput').val()
+    }
+
     $.ajax({
         url: '/editUser',
         type: 'POST',
-        data: {
-            'username':name,
-            'email' :   email,
-            'city': city,
-            'country' : country
-        },
+        data: data,
         success: function(){
             setTimeout(function(){window.location.href="/my-account"},
                       200);
