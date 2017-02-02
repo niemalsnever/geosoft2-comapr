@@ -4,7 +4,8 @@
 <!-- BEGIN CUSTOM CSS EMBEDDING -->
 <link rel="stylesheet" href="stylesheets/custom/main_style.css">
 <link rel="stylesheet" href="stylesheets/custom/registration.css">
-<!-- END CUSTOM CSS EMBEDDING -->
+<link rel="stylesheet" href="javascripts/vegas/vegas.min.css">
+</link><!-- END CUSTOM CSS EMBEDDING -->
 
 <!-- ALL CSS FILES MUST BE INCLUDED BEFORE THIS LINE! -->
 
@@ -21,9 +22,9 @@
 <div class="container-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8" style="background-color:rgba(0, 0, 0, 0.3); border-radius: 50px 15px">
                 <div class="page-header"><h1>Welcome to CoMapR!</h1></div>
-                <p class="hidden-xs lead">Use CoMapR to analyse satelite immagery collaboratively with R</p>
+                <p class="hidden-xs lead">Use CoMapR to collaboratively analyse satellite imagery with R</p>
             </div>
             <div class="col-md-4 container" id="regContainer">
                 <div class="panel panel-default regPanel">
@@ -69,7 +70,26 @@
 <!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
 
 <!-- BEGIN CUSTOM JS EMBEDDING -->
+<script src="javascripts/vegas/vegas.min.js" type="text/javascript"></script>
 <script src="javascripts/custom/registration.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $('body').vegas({
+        color: '#000000',
+        delay: 7000,
+        preload: true,
+        timer: false,
+        shuffle: true,
+        transition: 'fade',
+        transitionDuration: 2500,
+        slides: [
+            { src: "images/background/coast-1149735_1920.jpg"},
+            { src: "images/background/earth-11048_1920.jpg"},
+            { src: "images/background/earth-1990298_1920.jpg"},
+            { src: "images/background/globe-1290377_1920.jpg"},
+            { src: "images/background/satellite-1820063_1920.jpg"}
+        ]
+    });
+</script>
 <!-- END CUSTOM JS EMBEDDING -->
 
 <!-- DO NOT EDIT AFTER THIS LINE -->
