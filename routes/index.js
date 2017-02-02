@@ -18,9 +18,11 @@ router.get('/', function (req, res) {
         res.redirect('/my-projects');
     }
 });
+
 router.get('/sign-up', function (req, res) {
     res.render('index', { title: 'Login' });
 });
+
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
@@ -85,7 +87,7 @@ router.post('/login', pp.pass.authenticate('local', {
 
 
 router.post('/login', function(req, res, next) {
-     console.log(req.body);
+     //console.log(req.body);
      //noinspection JSUnusedLocalSymbols
      pp.pass.authenticate('local', function(err, user, info) {
          if (err) {

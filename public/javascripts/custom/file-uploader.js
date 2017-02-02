@@ -18,3 +18,29 @@ $(document).ready( function() {
 
     });
 });
+
+$('#uploadButton').on('click', function () {
+    uploadFile();
+});
+
+function uploadFile() {
+    var form = document.getElementById('file-upload-form');
+    var formdata = new FormData(form);
+
+    console.log(formdata);
+
+    $.ajax({
+        type: "POST",
+        data: formdata,
+        url: '/api/fileUpload',
+        processData: false,
+        contentType: false,
+        timeout: 10000,
+        success: function(data, textStatus){
+            console.log("successfully saved");
+        },
+        error: function(xhr, textStatus, errorThrown){
+            console.log("saving failed");
+        }
+    })
+}

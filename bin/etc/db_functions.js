@@ -14,7 +14,7 @@ module.exports = {
         })
     },
 
-    getUserProjects: function(id, callback){
+    getUserProjects : function(id, callback){
         db.serialize(function() {
             db.all('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?;', id, id, function(err, rows)
             {
@@ -68,5 +68,4 @@ module.exports = {
             });
         })
     }
-
 };

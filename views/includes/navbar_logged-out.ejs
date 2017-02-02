@@ -1,8 +1,4 @@
-<%
-if(typeof rto == 'undefined') {
-    var rto = "";
-}
-%>
+
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -23,7 +19,7 @@ if(typeof rto == 'undefined') {
                 </div>
                 <div class="form-group">
                     <input type="password" placeholder="Password" class="form-control" name="loginPassword" id="loginPassword">
-                    <input type="hidden" name="rto" value="<%= typeof(rto) == 'undefined' ? rto : '' %>" id="rto-hidden">
+                    <input type="hidden" name="rto" value="<%= typeof(rto) != 'undefined' ? rto : '' %>" id="rto-hidden">
                 </div>
                 <button type="button" class="btn btn-success" id="loginButton">Sign in</button>
             </form>

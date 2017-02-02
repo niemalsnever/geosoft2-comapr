@@ -9,7 +9,7 @@ var io = require('socket.io')(http);
 var socket = require('socket.io')(http);
 
 var index = require('./routes/index');
-//var api = require('./routes/api');
+var api = require('./routes/api');
 var template_view = require('./routes/template');
 
 var app = express();
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
 app.use('/', index);
-//app.use('/api', api);
+app.use('/api', api);
 app.use('/TEMPLATE', template_view);
 
 app.get('/my-projects', function(req,res){
