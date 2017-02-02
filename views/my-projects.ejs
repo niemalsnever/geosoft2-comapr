@@ -42,7 +42,7 @@
                                         <span class='pull-right'>
                                             <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-info"><i class="glyphicon glyphicon-share"></i> Invite User</a>
                                             <!-- FIXME -->
-                                            <a data-original-title="Remove this project" data-toggle="tooltip" onclick="deleteProject(<%= rows[i].projectid %>); window.location.reload()"
+                                            <a data-original-title="Remove this project" data-toggle="tooltip" onclick="deleteProject(<%= rows[i].projectid + ", \'" + rows[i].projectname + "\'" %>);"
                                             class="btn btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete Project</a>
                                         </span>
                                     </td>

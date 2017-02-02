@@ -30,6 +30,10 @@ module.exports = {
     deleteProject: function(id){
         db.run("DELETE from Projects where id = ?;", id);
     },
+    deleteDirectory: function(projectname){
+        db.run("DELETE from Projects where name = ?;", name);
+    },
+    
     deleteUser: function(id){
         db.run("DELETE from Users where id = ?;", id);
     },
