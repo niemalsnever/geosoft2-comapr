@@ -1,4 +1,6 @@
+
 function deleteProject(id, projectname)
+
 {
     $.ajax({
         url: '/deleteProject',
@@ -16,18 +18,10 @@ function newProject(name)
         type: 'POST',
         data: {
             'projectname': name
+        },
+        success: function(){
+            setTimeout(function(){window.location.href="/my-projects"},
+                200);
         }
-    })
-}
-
-function projectID()
-{
-    $.ajax({
-        url:'/projectID',
-        type:'POST',
-        data:{
-            'projectid': id
-        }
-        
     })
 }
