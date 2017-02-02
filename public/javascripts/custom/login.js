@@ -31,7 +31,7 @@ function login() {
         },
         success: function (data) {
             console.log(data);
-            window.location.reload(data);
+            window.location.href=data;
         }
     })
 }

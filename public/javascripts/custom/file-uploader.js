@@ -25,13 +25,17 @@ $('#uploadButton').on('click', function () {
 
 function uploadFile() {
     var form = document.getElementById('file-upload-form');
-    var formdata = new FormData(form);
+    var formData = new FormData();
 
-    console.log(formdata);
+    files = $('#file-input').get(0).files;
+
+    formData.append('uploads[]', files[0], files[0].name);
+
+    console.log(formData);
 
     $.ajax({
         type: "POST",
-        data: formdata,
+        data: formData,
         url: '/api/fileUpload',
         processData: false,
         contentType: false,

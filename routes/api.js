@@ -3,6 +3,7 @@
  */
 
 var fs = require('fs');
+var path = require('path');
 var express = require('express');
 var router = express.Router();
 var bodyParser = require("body-parser");
@@ -10,6 +11,9 @@ router.use(bodyParser.json());
 var dbFunctions = require('../bin/etc/db_functions.js');
 var util = require('util');
 
+var formidable = require('formidable');
+
+/*
 var multer = require('multer');
 
 
@@ -22,6 +26,7 @@ var uploadedFile = upload.fields([{
     name: 'file-upload',
     maxCount: 1
 }]);
+*/
 
 
 
@@ -99,9 +104,40 @@ router.post('/saveCode', function(req, res){
     })
 });
 
+router.post('/fileUpload', function (req, res) {
+    var form = new formidable.IncomingForm();
+
+    form.multiples = false;
+
+    form.uploadDir = path.join(__dirname, '../data/projects');
+
+    // every time a file has been uploaded successfully,
+    // rename it to it's orignal name
+    form.on('file', function(field, file) {
+        fs.rename(file.path, path.join(form.uploadDir, file.name));
+    });
+
+    // log any errors that occur
+    form.on('error', function(err) {
+        console.log('An error has occured: \n' + err);
+    });
+
+    // once all the files have been uploaded, send a response to the client
+    form.on('end', function() {
+        res.end('success');
+    });
+
+    // parse the incoming request containing the form data
+    form.parse(req);
+})
+
+
+/*
 //FIXME: This is not working at all!
 router.post('/fileUpload', uploadedFile, function (req, res) {
     res.send('meh');
 });
+*/
+
 
 module.exports = router;
