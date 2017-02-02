@@ -1,4 +1,4 @@
-//FIXME
+
 function deleteProject(id)
 {
     $.ajax({

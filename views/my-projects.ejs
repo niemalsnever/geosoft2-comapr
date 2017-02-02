@@ -38,7 +38,7 @@
                             <tr>
                                 <form action="/deleteProject" method= "post">
                                     <!-- FIXME-->
-                                    <td><a href='/map-view?<%='ProjectID='+projects.id%>'><%= rows[i].projectname %></a>
+                                    <td><a href='/map-view?<%='projectID='+projects.id%>'><%= rows[i].projectname %></a>
                                         <span class='pull-right'>
                                             <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-info"><i class="glyphicon glyphicon-share"></i> Invite User</a>
                                             <!-- FIXME -->
@@ -61,7 +61,6 @@
 <%- include('includes/footer.ejs') %>
 <%- include('includes/modals.ejs') %>
 <!-- ADDITIONAL JAVASCRIPT MUST BE INCLUDED AFTER THIS LINE -->
-<script src="javascripts/custom/projectmanagement.js"></script>
 <!-- DO NOT EDIT AFTER THIS LINE -->
 </body>
 </html>

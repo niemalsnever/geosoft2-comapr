@@ -33,8 +33,14 @@ module.exports = {
         db.run("DELETE from Users where id = ?;", id);
     },
     //FIXME
-    getProjectID: function(){
+    projectID: function(){
         db.run('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects;');
+    }
+    ,
+    //FIXME
+    editUser : function (name, email, city, country) {
+        var now = Date.now().toString();
+        db.run("UPDATE Users Set name, email, city, country  VALUES (?, ?, ?, ? ) WHERE id=?;", name, email, city, country, id);
     }
     ,
     // TODO: This is not working and might be removed

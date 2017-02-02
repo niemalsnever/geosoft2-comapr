@@ -39,13 +39,23 @@ module.exports = {
     }
     ,
     
- // FIXME
-    getProjectID : function(callback){
+    editUser: function(name, email, city, country, callback){
         db.serialize(function(){
-            db.get('SELECT Projects.id AS projectID, Projects.name AS projectName FROM Projects;', function(err, row){
+            db.run('UPDATE Users Set name= ?, email=?, city=?, country=? WHERE id=? VALUES (?, ?, ?, ?, ?);', Username, email, city, country, id, function(err, result)
+                  {
+                callback(err, result);
+            });
+        })
+    }
+    ,
+ // FIXME
+    projectID : function(callback){
+        db.serialize(function(){
+            db.get('SELECT Projects.id AS projectID FROM Projects;', function(err, row){
                 callback(err,row);
                 
             });
         })
     }
+    
 }

@@ -82,6 +82,7 @@ router.get('/edit', function (req, res) {
 router.get('/map-view', function (req, res) {
     if(req.user) {
         //console.log(req.user);
+        req.query.projectid;
         res.render('map-view', { title: 'Map View', user: req.user });
     }
     else {
@@ -149,7 +150,6 @@ router.post('/newProject', function (req, res) {
     helper.newProject(req.body.projectname, req.user.id);
     res.redirect("/");
 });
-//FIXME
 router.post('/deleteProject', function(req, res){
     helper.deleteProject(req.body.projectid);
     res.redirect("/");
@@ -162,6 +162,13 @@ router.post('/deleteUser', function(req,res){
     res.send("User successfully deleted");
     });
 
+//FIXME
+router.post('/editUser', function(req,res){
+    helper.editUser(req.body.name, req.body.email, req.body.city, req.body.country, req.body.id);
+    res.send("User successfully edited");
+    res.send("/");
+})
+//id=? , name= ?, email=?, city=?, country=? WHERE id=
 //SAVE from Textarea to R-File
 router.post('/getcode', function(req, res){
  var usercode = req.body.code;

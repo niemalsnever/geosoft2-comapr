@@ -94,7 +94,8 @@
                         <div class="pull-right">
                             <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-lg"
                                data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></a>
-                            <a title="Save changes" data-toggle="tooltip" type="button"
+                            <!--FIXME-->
+                            <a title="Save changes" data-toggle="tooltip" onclick ="editUser($('id').val(),$('name').val(),$('email').val(), $('City').val(),$('Country').val()); window.location.reload()" type="button"
                                class="btn btn-success btn-lg"><i class="glyphicon glyphicon-floppy-disk"></i></a>
                         </div>
                     </div>
@@ -124,3 +125,6 @@
 
     </div>
 </div>
+
+<script src="javascripts/custom/projectmanagement.js"></script>
+<script src="javascripts/custom/usermanagement.js"></script>
