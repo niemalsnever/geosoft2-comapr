@@ -1,5 +1,5 @@
 <select class="form-control" id="regCountryInput" onchange="validateRegForm();" required aria-required="true" name="regCountry">
-    <option selected>-- Please select --</option>
+    <option selected value="<%= typeof(user) != 'undefined' ? user.country : '' %>"><%= typeof(user) != 'undefined' ? user.country : '-- Please select --' %></option>
     <option value="Afghanistan">Afghanistan</option>
     <option value="Albania">Albania</option>
     <option value="Algeria">Algeria</option>

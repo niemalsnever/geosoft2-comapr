@@ -5,6 +5,7 @@ var fs = require('fs');
 var helper = require('../bin/etc/helper_functions');
 var pp = require('../bin/etc/passport_setup');
 var db_functions = require('../bin/etc/db_functions');
+
 pp.passport_setup();
 
 router.use(pp.pass.initialize());
@@ -18,7 +19,9 @@ router.get('/', function (req, res) {
         res.redirect('/my-projects');
     }
 });
-
+router.get('/sign-up', function (req, res) {
+        res.render('index', { title: 'Login' });
+});
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
@@ -132,7 +135,7 @@ router.get('/good-login', function (req, res) {
 
 router.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/');
+    res.redirect('/sign-up');
 });
 
 router.post('/register', function (req, res) {
@@ -145,14 +148,34 @@ router.post('/register', function (req, res) {
 router.post('/newProject', function (req, res) {
     //console.log(req.body);
     helper.newProject(req.body.projectname, req.user.id);
+    fs.mkdir('./data/'+req.body.projectname,0777, function(err){
+        if(err){
+            return console.error(err);
+        }
+        console.log("directory created successfully!");
+    })
     res.redirect("/");
 });
-//FIXME
+
 router.post('/deleteProject', function(req, res){
     helper.deleteProject(req.body.projectid);
     res.redirect("/");
 });
 
+router.post('/deleteUser', function(req,res){
+    req.body.rto="";
+    req.logout();
+    helper.deleteUser(req.body.userID);
+    res.send("User successfully deleted");
+    });
+
+//FIXME
+router.post('/editUser', function(req,res){
+    helper.editUser(req.body.username, req.body.email, req.body.city, req.body.country, req.user.id);
+    res.send("User successfully edited");
+    res.send("/");
+})
+//id=? , name= ?, email=?, city=?, country=? WHERE id=
 //SAVE from Textarea to R-File
 router.post('/getcode', function(req, res){
  var usercode = req.body.code;

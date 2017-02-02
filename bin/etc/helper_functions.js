@@ -19,11 +19,37 @@ module.exports = {
         db.run("INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, ?);", name, email, city, country, hash, now);
     },
     newProject: function (name, ownerid) {
-        db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
+        try{
+            db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
+           //db.run("INSERT INTO Data Values")
+        }
+        catch(err){
+            console.log("asdf");
+        }
     },
     deleteProject: function(id){
         db.run("DELETE from Projects where id = ?;", id);
     },
+    deleteUser: function(id){
+        db.run("DELETE from Users where id = ?;", id);
+    },
+    //FIXME
+    projectID: function(){
+        db.run("SELECT Projects.id AS projectid FROM Projects WHERE id=?;", id);
+    }
+    ,
+    //FIXME
+    editUser : function (name, email, city, country) {
+        var now = Date.now().toString();
+        db.run("UPDATE Users Set name, email, city, country  VALUES (?, ?, ?, ? ) WHERE id=?;", name, email, city, country, id);
+    }
+    ,
+    //FIXME
+    editUser : function (name, email, city, country, id) {
+        var now = Date.now().toString();
+        db.run("UPDATE Users Set name=?, email=?, city=?, country=?  WHERE id=?;", name, email, city, country, id);
+    }
+    ,
     // TODO: This is not working and might be removed
     ensureAuthenticated: function (req, res, next) {
         req.session.returnTo = req.path;

@@ -8,11 +8,14 @@ var helper = require('./helper_functions');
 db.serialize(function () {
     var now = Date.now().toString();
     var hash = helper.hashPassword('hallo',now);
+    var hash1 = helper.hashPassword('hallo',now);
     console.log(hash);
     console.log(now);
     //console.log("INSERT INTO Users VALUES (null, 'Hans', 'hans@test.de', '" + hash +"', '" + now +"');");
     db.run("INSERT INTO Users VALUES (null, 'Hans', 'hans@test.de','Münster','Deutschland', '" + hash +"', '" + now.toString() +"');");
    
+    db.run("INSERT INTO Users VALUES (null, 'Heinz', 'heinz@test.de','Münster','Deutschland', '" + hash1 +"', '" + now.toString() +"');");
+    
     db.run("INSERT INTO Projects VALUES (null, 'test test', '1');");
     db.run("INSERT INTO Projects VALUES (null, 'test 2', '1');");
     
