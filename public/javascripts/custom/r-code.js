@@ -28,7 +28,7 @@ function saveTextAsR() {
         var filename = $('#editorname')[0].value;
         console.log("This is content: " + content);
         $.ajax({
-            url: '/getcode',
+            url: '/api/saveCode',
             type: 'POST',
             data: {
               'newname' : filename,

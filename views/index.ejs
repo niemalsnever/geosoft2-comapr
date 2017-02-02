@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="page-header"><h1>Welcome to CoMapR!</h1></div>
-                <p class="hidden-xs lead">Use CoMapR to analyse collaboratively with R on satelite immagery</p>
+                <p class="hidden-xs lead">Use CoMapR to analyse satelite immagery collaboratively with R</p>
             </div>
             <div class="col-md-4 container" id="regContainer">
                 <div class="panel panel-default regPanel">
@@ -31,7 +31,7 @@
                         <h2 class="panel-title">Sign-up here</h2>
                     </div>
                     <div class="panel-body">
-                    <form name="registration" id="regForm" method="post" action="/register">
+                    <form name="registration" id="regForm">
                         <div class="form-group">
                             <label for="regNameInput">Your Name</label>
                             <input type="text" class="form-control" id="regNameInput" placeholder="Name" onchange="validateRegForm();" required aria-required="true" name="regName">
@@ -50,11 +50,10 @@
                         </div>
                         <div class="form-group">
                             <label for="regCountryInput">Country</label>
-                            <!--<input type="text" class="form-control" id="regCountryInput" placeholder="Country" onchange="validateRegForm();" required aria-required="true" name="regCountry">-->
                             <%- include('includes/cl_dropdown.ejs') %>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success btn-block" disabled type="submit" id="regSubmit">Sign up</button><button class="btn btn-default btn-block" type="reset">Reset</button>
+                            <button class="btn btn-success btn-block" disabled type="submit" id="regSubmit" onclick="registerUser()">Sign up</button><button class="btn btn-default btn-block" type="reset">Reset</button>
                         </div>
                     </form>
                     </div>

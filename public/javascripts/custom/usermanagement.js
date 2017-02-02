@@ -1,7 +1,7 @@
 function deleteUser(id)
 {
     $.ajax({
-        url: '/deleteUser',
+        url: '/api/deleteUser',
         type: 'POST',
         data: {
             'userID': id
@@ -10,24 +10,24 @@ function deleteUser(id)
             setTimeout(function(){window.location.href="/sign-up"}, 200);
         }
     })
-   
+
 }
-//FUCKING FIXME
+
 function editUser(){
     data = {
         'username': $('#editname').val(),
-            'email' :   $('#editemail').val(),
-            'city': $('#editcity').val(),
-            'country': $('#regCountryInput').val()
-    }
+        'email':   $('#editemail').val(),
+        'city': $('#editcity').val(),
+        'country': $('#regCountryInput').val()
+    };
 
     $.ajax({
-        url: '/editUser',
+        url: '/api/editUser',
         type: 'POST',
         data: data,
-        success: function(){
+        success: function() {
             setTimeout(function(){window.location.href="/my-account"},
-                      200);
+                200);
         }
     })
 }

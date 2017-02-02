@@ -4,7 +4,7 @@
 
 var sbShown = true;
 function toggleSidebar() {
-    var mainContent = $('main');
+    var mainContent = $('#main');
     if(sbShown == true) {
         $('#sidebar').fadeToggle(800, function () {
             mainContent.removeClass('col-md-9');
