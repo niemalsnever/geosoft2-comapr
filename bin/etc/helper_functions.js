@@ -21,6 +21,7 @@ module.exports = {
     newProject: function (name, ownerid) {
         try{
             db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
+           //db.run("INSERT INTO Data Values")
         }
         catch(err){
             console.log("asdf");
@@ -34,7 +35,7 @@ module.exports = {
     },
     //FIXME
     projectID: function(){
-        db.run('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects;');
+        db.run("SELECT Projects.id AS projectid FROM Projects WHERE id=?;", id);
     }
     ,
     //FIXME

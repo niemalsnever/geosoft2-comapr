@@ -51,7 +51,7 @@ module.exports = {
  // FIXME
     projectID : function(callback){
         db.serialize(function(){
-            db.get('SELECT Projects.id AS projectID FROM Projects;', function(err, row){
+            db.get('SELECT Projects.id AS projectID FROM Projects WHERE Projects.id = ?;',id, function(err, row){
                 callback(err,row);
                 
             });
