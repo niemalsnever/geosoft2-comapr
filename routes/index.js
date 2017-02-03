@@ -81,19 +81,30 @@ router.get('/edit', function (req, res) {
 });
 
 router.get('/map-view', function (req, res) {
-    if(req.user) {
-        //console.log(req.user);
-        res.render('map-view', { title: 'Map View', user: req.user });
-    }
-    else {
+    var project;
+    if(req.user && req.query.projectID) {
+
+        db_functions.getProjectByHash(req.query.projectID, function(err, row) {
+            if(!err){
+                console.log(row);
+                project = row;
+                //console.log(req.user);
+                res.render('map-view', { title: 'Map View', user: req.user, project: project });
+            } else {
+                res.send('buh')
+                console.log(err);
+            }
+        });
+    } else {
         res.status(403).render('error',  {
             error: {
                 status: 403,
                 msg: 'Sorry, you are not logged in. Please click here to get back to the <a href="/">Login page</a>'
             },
-            rto: '/map-view'
+        rto: '/map-view'
         })
     }
+    
 });
 
 // router.post('/login', pp.pass.authenticate('local', {

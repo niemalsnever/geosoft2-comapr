@@ -19,9 +19,16 @@ module.exports = {
                   {
                 callback(err, rows);
             });
-        })
+        });
     }
     ,
+    getProjectByHash : function(hashProject, callback){
+        db.serialize(function(){
+            db.get('SELECT * FROM Projects WHERE hashProject = ?;', hashProject, function(err, row){
+                callback(err, row);
+            });
+        })
+    },
     
     deleteProject : function(id, callback){
         db.run('delete from Projects where Projects.id = ?', id ,function(err, result)
@@ -56,14 +63,6 @@ module.exports = {
         })
     }
     ,
- // FIXME
-    projectID : function(callback){
-        db.serialize(function(){
-            db.get('SELECT Projects.id AS projectID FROM Projects WHERE Projects.id = ?;',id, function(err, row){
-                callback(err,row);
-                
-            });
-        })
-    }
+
     
 }
