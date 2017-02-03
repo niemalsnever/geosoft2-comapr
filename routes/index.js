@@ -146,24 +146,17 @@ router.post('/register', function (req, res) {
 
 
 router.post('/newProject', function (req, res) {
-    //console.log(req.body);
+    console.log(req.body);
     helper.newProject(req.body.projectname, req.user.id);
-    fs.mkdir('./data/'+req.body.projectname,0777, function(err){
-        if(err){
-            return console.error(err);
-        }
-        console.log("directory created successfully!");
-    })
     res.redirect("/");
 });
 
 router.post('/deleteProject', function(req, res){
     helper.deleteProject(req.body.projectid);
     try{
-    fs.rmdir('./data/'+req.body.projectname,function(err){
-        
+    helper.deleteFolderRecursive('./data/' + req.body.projectname);
         console.log("deleted directory");
-    });}
+    }
     catch(err) {
         console.log(err);
     }
@@ -205,5 +198,7 @@ router.post('/getcode', function(req, res){
      }
    })
  });
+
+ 
 
 module.exports = router;

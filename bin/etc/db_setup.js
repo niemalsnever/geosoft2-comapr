@@ -18,6 +18,7 @@ if(db) {
         db.run("CREATE TABLE IF NOT EXISTS Projects (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "name VARCHAR(250) NOT NULL UNIQUE, " +
+            "hashProject INTEGER UNIQUE," +
             "ownerid INTEGER, " +
             "FOREIGN KEY(ownerid) REFERENCES Users(id));");
         //Creates Permissions table

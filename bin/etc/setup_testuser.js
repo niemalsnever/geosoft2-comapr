@@ -16,11 +16,11 @@ db.serialize(function () {
    
     db.run("INSERT INTO Users VALUES (null, 'Heinz', 'heinz@test.de','Münster','Deutschland', '" + hash1 +"', '" + now.toString() +"');");
     
-    db.run("INSERT INTO Projects VALUES (null, 'test test', '1');");
-    db.run("INSERT INTO Projects VALUES (null, 'test 2', '1');");
+  //  db.run("INSERT INTO Projects VALUES (null, 'test test', '1');");
+//    db.run("INSERT INTO Projects VALUES (null, 'test 2', '1');");
     
-    db.run("INSERT INTO Permissions VALUES (null, '1', '123', 'true', 'true', 'true' );");
-    db.run("INSERT INTO Permissions VALUES (null, '1', '124', 'true', 'true', 'true' );");
+//    db.run("INSERT INTO Permissions VALUES (null, '1', '123', 'true', 'true', 'true' );");
+//    db.run("INSERT INTO Permissions VALUES (null, '1', '124', 'true', 'true', 'true' );");
 });
 
 db.close();
