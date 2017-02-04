@@ -23,19 +23,37 @@ function destroyClickedElement(event) {
 
 //Save from Textarea to R-File on Server
 function saveTextAsR() {
-        console.log('Hier bin ich!');
-        var content = editor.getValue();
-        var filename = $('#editorname')[0].value || $('#editorname').placeholder;
-        console.log("This is content: " + content);
+    console.log('Hier bin ich!');
+    var content = editor.getValue();
+    var editorJQ = $('#editorname')
+    var filename = editorJQ[0].value || editorJQ.placeholder;
+    console.log("This is content: " + content);
         $.ajax({
             url: '/api/saveCode',
             type: 'POST',
             data: {
-              'newname' : filename,
+                'newname': filename,
                 'code': content
             },
             processData: 'false'
         });
-        event.preventDefault();
-        return false;
+    event.preventDefault();
+    return false;
+}
+
+function runRCode() {
+    var content = editor.getValue();
+    console.log("This is content: " + content);
+    $.ajax({
+        url: '/api/runRScript',
+        type: 'POST',
+        data: {
+            'code': content
+        },
+        processData: 'false',
+        success: function (data) {
+            console.log(data);
+            $('body').append(data);
+        }
+    })
 }
