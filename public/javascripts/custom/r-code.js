@@ -25,19 +25,21 @@ function destroyClickedElement(event) {
 function saveTextAsR() {
     console.log('Hier bin ich!');
     var content = editor.getValue();
-    var editorJQ = $('#editorname')
-    var filename = editorJQ[0].value || editorJQ.placeholder;
+    var editorJQ = $('#editorname');
+    var filename = editorJQ[0].value || 'currentEditorText';
     console.log("This is content: " + content);
         $.ajax({
-            url: '/api/saveCode',
+            url: '/api/saveCode?pn=' + projectHash,
             type: 'POST',
             data: {
                 'newname': filename,
                 'code': content
             },
-            processData: 'false'
+            processData: 'false',
+            success: function () {
+                dataTreeUpdate();
+            }
         });
-    event.preventDefault();
     return false;
 }
 

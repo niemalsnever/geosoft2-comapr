@@ -4,12 +4,12 @@
 //Function to set tree-view logic
 var tree;
 
-var dataTreeUpdate = function(){
+function dataTreeUpdate(){
     $.ajax({
         type: "POST",
         url: '/api/getDataTree',
         data: {
-            projectName: projectName.toString()
+            projectName: projectHash.toString()
         },
         success: function(data) {
             tree = data;
@@ -17,7 +17,8 @@ var dataTreeUpdate = function(){
         complete: function() {
             if (tree != null) {
                 $('#tree').treeview({
-                    data: [tree]
+                    data: [tree],
+                    levels: 2
                 });
             } else {
                 $('#tree').append('<div style="font-size: small; text-align: center; font-style: italic">Your project does not contain any files</div>')
@@ -25,6 +26,17 @@ var dataTreeUpdate = function(){
         }
     })
 };
+
+function dataTreeUpdateData(tree) {
+    if (tree != null) {
+        $('#tree').treeview({
+            data: tree,
+            levels: 2
+        });
+    } else {
+        $('#tree').append('<div style="font-size: small; text-align: center; font-style: italic">Your project does not contain any files</div>')
+    }
+}
 
 //TO-DO retrieve Data from DB
 var demoTree = [

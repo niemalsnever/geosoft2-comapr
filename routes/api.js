@@ -26,8 +26,7 @@ router.post('/registerUser', function (req, res) {
             res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ")");
         } else {
             console.error('Registration failed: ' + err);
-            res.status(400);
-            res.send("Registration failed.");
+            res.status(400).send("Registration failed.");
         }
     });
 });
@@ -38,7 +37,7 @@ router.post('/newProject', function (req, res) {
             res.send("Created Project '" + req.body.projectname + "'");
         } else {
             console.error("Failed to create project: " + err);
-            res.send("Failed to create project");
+            res.status(400).send("Failed to create project.");
         }
     });
 });
@@ -63,16 +62,19 @@ router.post('/editUser', function(req,res){
             res.send("User successfully edited");
         } else {
             console.error(err);
-            res.status(400).send("User edit failed.")
+            res.status(400).send("User edit failed.");
         }
     });
 });
 
 
-router.post('/saveCode', function(req, res){
+router.post('/saveCode*', function(req, res){
     var usercode = req.body.code;
     var newname = req.body.newname + '.r';
-    fs.writeFileSync(newname, usercode, function(err) {
+
+    var filePath = path.join(__dirname, '../data/projects/' + req.query.pn + '/' + newname);
+
+    fs.writeFile(filePath, usercode, function(err) {
         if (err) {
             res.send('Something when wrong');
         } else {
@@ -181,6 +183,15 @@ router.post('/getDataTree', function(req, res){
     var mytree = dirTree(path.join(__dirname, '../data/projects/' + req.body.projectName));
     res.json(mytree);
 
+});
+
+router.get('/getUserProjects', function (req, res) {
+    var userProjects = dbFunctions.getUserProjects(req.user.id);
+    if(!err) {
+        res.json(userProjects);
+    } else {
+        res.status(400).send('Could not get user projects');
+    }
 });
 
 module.exports = router;

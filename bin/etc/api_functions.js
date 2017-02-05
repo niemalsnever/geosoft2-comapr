@@ -13,15 +13,15 @@ module.exports = {
         console.log(name + "\n" + ownerid);
         permalink = helper.hashProject(name.toString(),ownerid.toString());
 
-        projectDirPath = path.join(__dirname, '../../data/projects/' + name);
+        projectDirPath = path.join(__dirname, '../../data/projects/' + permalink);
 
         dbFunctions.newProject(name, ownerid, permalink, function (err) {
             if(!err) {
                 try {
                     //noinspection OctalIntegerJS
                     console.log('mööp');
-                    fs.mkdir(projectDirPath, 0755);
-                    callback();
+                    fs.mkdirSync(projectDirPath, 0755);
+                    callback(err);
                 } catch(e) {
                     callback(e);
                 }
@@ -31,10 +31,13 @@ module.exports = {
         })
     },
 
-    deleteProject: function (projectid, projectname, userid, callback) {
-        dbFunctions.deleteProject(projectid, userid, function (err) {
-            projectDirPath = path.join(__dirname, '../../data/projects/' + projectname);
+    deleteProject: function (projectid, projectname, ownerid, callback) {
+        dbFunctions.deleteProject(projectid, ownerid, function (err) {
+            permalink = helper.hashProject(projectname.toString(),ownerid.toString());
+            projectDirPath = path.join(__dirname, '../../data/projects/' + permalink);
+            console.log(projectDirPath);
             if(!err) {
+                console.log(projectDirPath);
                 helper.deleteFolderRecursive(projectDirPath, function (err) {
                     callback(err)
                 })
@@ -50,5 +53,5 @@ module.exports = {
         dbFunctions.registerUser(name, email, city, country, hash, now, function (err) {
             callback(err);
         })
-    },
+    }
 };

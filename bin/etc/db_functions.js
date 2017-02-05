@@ -63,9 +63,10 @@ module.exports = {
                 db.run("DELETE FROM Projects WHERE Projects.id = ? AND Projects.ownerid = ?;", projectid, userid);
             } catch (e) {
                 console.error(e);
-                callback(e);
+                return callback(e);
             }
         });
+        callback();
     },
 
     deleteUser: function(id, callback){

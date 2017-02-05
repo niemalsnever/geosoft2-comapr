@@ -36,7 +36,7 @@ function uploadFile() {
     $.ajax({
         type: "POST",
         data: formData,
-        url: '/api/fileUpload?pn=' + projectName,
+        url: '/api/fileUpload?pn=' + projectHash,
         processData: false,
         contentType: false,
         timeout: 10000,

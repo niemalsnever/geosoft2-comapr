@@ -14,7 +14,7 @@ module.exports = {
     },
 
     hashProject: function(name, ownerid) {
-        var hash = crypto.createHash('sha256');
+        var hash = crypto.createHash('md5');
         hash.update(name);
         hash.update(ownerid);
         return hash.digest('hex');

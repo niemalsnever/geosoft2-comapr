@@ -1,4 +1,4 @@
-<%- include('includes/head.ejs')%>
+<%- include('includes/head.ejs') %>
 <!-- DO NOT EDIT BEFORE THIS LINE -->
 
 <!-- BEGIN CUSTOM CSS EMBEDDING -->
@@ -17,40 +17,46 @@
 
 <div class="container-fluid">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row" id="alert-space">
+        </div>
+        <div class="row">
         <div class="panel panel-default">
-        <div class="panel-heading clearfix">
+            <div class="panel-heading clearfix">
                 <h2 class="panel-title pull-left" style="padding-top: 10px;padding-left: 5px; "><b>My Projects</b></h2>
-                    <div class="btn-group pull-right" style="padding-right: 8px">
-                                <a title="New Project" data-toggle="modal" href="#newProjectModal" type="button" class="btn btn-success btn-md"><i class="glyphicon glyphicon-plus" ></i> New Project</a>
-                    </div>
-
-
+                <div class="btn-group pull-right" style="padding-right: 8px">
+                    <a title="New Project" data-toggle="modal" href="#newProjectModal" type="button"
+                       class="btn btn-success btn-md"><i class="glyphicon glyphicon-plus"></i> New Project</a>
+                </div>
             </div>
 
             <div class="panel-body">
-
-                     <table class="table table-condensed" style="margin-bottom: 0px">
-                         <thead>
-                         <% for(i = 0; i < rows.length; i++) { %>
-                            <tr>
-                                <form action="/deleteProject" method= "post">
-                                    <!-- FIXME-->
-                                    <td><a href='/map-view?<%='projectID='+rows[i].projecthash%>'><%= rows[i].projectname %></a>
-                                        <span class='pull-right'>
-                                            <a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-info"><i class="glyphicon glyphicon-share"></i> Invite User</a>
-                                            <!-- FIXME -->
-                                            <a data-original-title="Remove this project" data-toggle="tooltip" onclick="deleteProject(<%= rows[i].projectid + ", \'" + rows[i].projectname + "\'" %>);"
-                                            class="btn btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete Project</a>
+                <table class="table table-condensed" style="margin-bottom: 0px" id="project-list">
+                    <!-- <thead>
+                    <% for(i = 0; i < rows.length; i++) { %>
+                    <tr>
+                        <form action="/deleteProject" method="post">
+                            &lt;!&ndash; FIXME&ndash;&gt;
+                            <td>
+                                <a href='/map-view?<%= 'projectID='+rows[i].projecthash %>'><%= rows[i].projectname %></a>
+                                <span class='pull-right'>
+                                            <a href="#" data-original-title="invite user" data-toggle="tooltip"
+                                               type="button" class="btn btn-info"><i
+                                                        class="glyphicon glyphicon-share"></i> Invite User</a>
+                                    &lt;!&ndash; FIXME &ndash;&gt;
+                                            <a data-original-title="Remove this project" data-toggle="tooltip"
+                                               onclick="deleteProject(<%= rows[i].projectid + ", \'" + rows[i].projectname + "\'" %>);"
+                                               class="btn btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete Project</a>
                                         </span>
-                                    </td>
-                                </form>
-                            </tr>
-                            <% } %>
+                            </td>
+                        </form>
+                    </tr>
+                    <% } %>
 
-                         </thead>
-                    </table>
+                    </thead>-->
+                </table>
 
             </div>
+        </div>
         </div>
     </div>
 </div>
