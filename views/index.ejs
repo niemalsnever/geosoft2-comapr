@@ -21,43 +21,45 @@
 
 <div class="container-fluid">
     <div class="container">
+        <div class="row" id="alert-space">
+        </div>
         <div class="row">
             <div class="col-md-8" style="background-color:rgba(0, 0, 0, 0.3); border-radius: 50px 15px">
                 <div class="page-header"><h1>Welcome to CoMapR!</h1></div>
                 <p class="hidden-xs lead">Use CoMapR to collaboratively analyse satellite imagery with R</p>
             </div>
-            <div class="col-md-4 container" id="regContainer">
+            <div class="col-md-4" id="regContainer">
                 <div class="panel panel-default regPanel">
                     <div class="panel-heading">
                         <h2 class="panel-title">Sign-up here</h2>
                     </div>
                     <div class="panel-body">
-                    <form name="registration" id="regForm">
-                        <div class="form-group">
-                            <label for="regNameInput">Your Name</label>
-                            <input type="text" class="form-control" id="regNameInput" placeholder="Name" onchange="validateRegForm();" required aria-required="true" name="regName">
-                        </div>
-                        <div class="form-group">
-                            <label for="regEmailInput">E-Mail-Address</label>
-                            <input type="email" class="form-control" id="regEmailInput" placeholder="E-Mail" onchange="validateRegForm();" required aria-required="true" name="regEmail">
-                        </div>
-                        <div class="form-group">
-                            <label for="regPasswordInput">Password</label>
-                            <input type="password" class="form-control" id="regPasswordInput" placeholder="Password" onchange="validateRegForm();" required aria-required="true" name="regPassword">
-                        </div>
-                        <div class="form-group">
-                            <label for="regCityInput">City</label>
-                            <input type="text" class="form-control" id="regCityInput" placeholder="City" onchange="validateRegForm();" required aria-required="true" name="regCity">
-                        </div>
-                        <div class="form-group">
-                            <label for="regCountryInput">Country</label>
-                            <%- include('includes/cl_dropdown.ejs') %>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-success btn-block" disabled type="submit" id="regSubmit" onclick="registerUser()">Sign up</button>
-                            <button class="btn btn-default btn-block" type="reset">Reset</button>
-                        </div>
-                    </form>
+                        <form name="registration" id="regForm" method="post">
+                            <div class="form-group">
+                                <label for="regNameInput">Your Name</label>
+                                <input type="text" class="form-control" id="regNameInput" placeholder="Name" onchange="validateRegForm();" required aria-required="true" name="regName">
+                            </div>
+                            <div class="form-group">
+                                <label for="regEmailInput">E-Mail-Address</label>
+                                <input type="email" class="form-control" id="regEmailInput" placeholder="E-Mail" onchange="validateRegForm();" required aria-required="true" name="regEmail">
+                            </div>
+                            <div class="form-group">
+                                <label for="regPasswordInput">Password</label>
+                                <input type="password" class="form-control" id="regPasswordInput" placeholder="Password" onchange="validateRegForm();" required aria-required="true" name="regPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="regCityInput">City</label>
+                                <input type="text" class="form-control" id="regCityInput" placeholder="City" onchange="validateRegForm();" required aria-required="true" name="regCity">
+                            </div>
+                            <div class="form-group">
+                                <label for="regCountryInput">Country</label>
+                                <%- include('includes/cl_dropdown.ejs') %>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success btn-block" disabled type="button" id="regSubmit" onclick="registerUser()">Sign up</button>
+                                <button class="btn btn-default btn-block" type="reset">Reset</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

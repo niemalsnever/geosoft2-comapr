@@ -1,6 +1,5 @@
 function validateRegForm() {
     if($("form#regForm")[0].checkValidity()) {
-        console.log("foo");
         $("button#regSubmit")[0].disabled = false;
     }
 }
@@ -16,8 +15,22 @@ function registerUser() {
             'regCountry': $('#regCountryInput').val(),
             'regPassword': $('#regPasswordInput').val()
         },
-        success: function () {
-            $('h1').append('User has been registered');
+        success: function (data) {
+            $('#alert-space').prepend(
+                '<div class="alert alert-success alert-dismissable fade in">' +
+                '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                data.responseText +
+                '</div>'
+            )
+        },
+        error: function (data) {
+            console.log(data);
+            $('#alert-space').prepend(
+                '<div class="alert alert-danger alert-dismissable fade in">' +
+                '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                data.responseText +
+                '</div>'
+            )
         }
     })
 }

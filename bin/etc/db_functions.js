@@ -3,7 +3,7 @@
  */
 
 var db = require('./db_connect').db;
-var helper = require('./helper_functions');
+var helper = require('./helper_functions.js');
 
 module.exports = {
     getUser : function (id, callback) {
@@ -13,15 +13,17 @@ module.exports = {
             });
         })
     },
+
     getUserProjects : function(id, callback){
         db.serialize(function() {
+            console.log("I'm hit");
             db.all('SELECT Projects.id AS projectid, Projects.name AS projectname, Projects.hashProject as projecthash FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?;', id, id, function(err, rows)
-                  {
+            {
                 callback(err, rows);
             });
         });
-    }
-    ,
+    },
+
     getProjectByHash : function(hashProject, callback){
         db.serialize(function(){
             db.get('SELECT * FROM Projects WHERE hashProject = ?;', hashProject, function(err, row){
@@ -29,34 +31,40 @@ module.exports = {
             });
         })
     },
-    
-    deleteProject : function(id, callback){
-        db.run('delete from Projects where Projects.id = ?', id ,function(err, result)
-              {
-            callback (err, result);
-        });
-        })
+
+    registerUser: function (name, email, city, country, hash, salt, callback) {
+
+        try {
+            db.run("INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, ?);", name, email, city, country, hash, salt, function (err) {
+                callback(err);
+            });
+        } catch(e) {
+            callback(e);
+        }
     },
 
-    registerUser: function (name, email, city, country, password) {
-        var now = Date.now().toString();
-        var hash = helper.hashPassword(password.toString(), now);
-        db.run("INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, ?);", name, email, city, country, hash, now);
-    },
-
-    newProject: function (name, ownerid) {
+    newProject: function (name, ownerid, projectHash, callback) {
         try{
-            db.run("INSERT INTO Projects VALUES (null, ?, ?);", name, ownerid);
+            db.run("INSERT INTO Projects VALUES (null, ?, ?, ?);", name, projectHash, ownerid, function (err) {
+                callback(err);
+            });
         }
-        catch(err){
-            console.error(err);
+        catch(e){
+            console.error(e);
+            callback(e);
         }
     },
 
-    deleteProject: function(projectid){
-        db.serialize(function (projectid) {
-            db.run('DELETE FROM Permissions WHERE Permissions.projectid = ?', projectid);
-            db.run("DELETE FROM Projects WHERE Projects.id = ?;", projectid);
+    deleteProject: function(projectid, userid, callback) {
+        console.log(userid);
+        db.serialize(function () {
+            try {
+                db.run('DELETE FROM Permissions WHERE Permissions.projectid = ? ', projectid);
+                db.run("DELETE FROM Projects WHERE Projects.id = ? AND Projects.ownerid = ?;", projectid, userid);
+            } catch (e) {
+                console.error(e);
+                callback(e);
+            }
         });
     },
 
@@ -67,11 +75,11 @@ module.exports = {
         });
     },
 
-editUser: function(name, email, city, country, callback){
-    db.serialize(function(){
-        db.run('UPDATE Users Set name= ?, email=?, city=?, country=? WHERE id=? VALUES (?, ?, ?, ?, ?);', Username, email, city, country, id, function(err, result)
-        {
-            callback(err, result);
-        });
-    })
-}
+    editUser: function(name, email, city, country, id, callback) {
+        db.serialize(function () {
+            db.run("UPDATE Users Set name=?, email=?, city=?, country=?  WHERE id=?;", name, email, city, country, id, function (err, result) {
+                callback(err, result);
+            });
+        })
+    }
+};

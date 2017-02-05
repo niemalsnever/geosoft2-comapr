@@ -13,32 +13,31 @@ module.exports = {
         return hash.digest('hex');
     },
 
-    hashProject: function(name, ownerid){
-        var permalink = null;
+    hashProject: function(name, ownerid) {
         var hash = crypto.createHash('sha256');
         hash.update(name);
         hash.update(ownerid);
-        return permalink =  hash.digest('hex');
+        return hash.digest('hex');
     },
 
-    deleteFolderRecursive: function(path){
+    deleteFolderRecursive: function(path, callback){
         console.log(path);
-        if(fs.existsSync(path)){
-            fs.readdirSync(path).forEach(function(file, index){
-                var curPath = path + "/" + file;
-                if(fs.lstatSync(curPath).isDirectory()){
-                    deleteFolderRecursive(curPath);
-                } else {
-                    fs.unlinkSync(curPath);
-                }
-            });
-            fs.rmdirSync(path);
-
+        try {
+            if (fs.existsSync(path)) {
+                fs.readdirSync(path).forEach(function (file, index) {
+                    var curPath = path + "/" + file;
+                    if (fs.lstatSync(curPath).isDirectory()) {
+                        deleteFolderRecursive(curPath);
+                    } else {
+                        fs.unlinkSync(curPath);
+                    }
+                });
+                fs.rmdirSync(path);
+            }
+        } catch (e) {
+            callback(e);
         }
-
     },
-
-
 
     // TODO: This is not working and might be removed
     ensureAuthenticated: function (req, res, next) {

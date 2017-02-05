@@ -8,7 +8,11 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require("body-parser");
 router.use(bodyParser.json());
-var dbFunctions = require('../bin/etc/db_functions.js');
+
+//var helper = require('../bin/etc/helper_functions.js');
+var dbFunctions = require('../bin/etc/db_functions');
+var apiFunctions = require('../bin/etc/api_functions');
+
 var util = require('util');
 
 var exec = require('child_process').exec;
@@ -16,54 +20,52 @@ var exec = require('child_process').exec;
 var formidable = require('formidable');
 
 
-//FIXME: Check for Database Errors!
 router.post('/registerUser', function (req, res) {
-    //console.log(req.body);
-    dbFunctions.registerUser(req.body.regName, req.body.regEmail, req.body.regCity, req.body.regCountry, req.body.regPassword);
-    res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ")");
-});
-
-//TODO: Check if Database entry for project was created before creating Project Directory
-router.post('/newProject', function (req, res) {
-    //console.log(req.body);
-    dbFunctions.newProject(req.body.projectname, req.user.id);
-    //noinspection OctalIntegerJS
-    fs.mkdir('./data/' + req.body.projectname, 0777, function(err){
-        if(err){
-            res.send('Project ' + req.body.projectname + ' could not be created. Possibly a Project with the same name already exists.');
-            return console.error(err);
+    apiFunctions.registerUser(req.body.regName, req.body.regEmail, req.body.regCity, req.body.regCountry, req.body.regPassword, function (err) {
+        if(!err) {
+            res.send("Registered User " + req.body.regName + " (" + req.body.regEmail + ")");
         } else {
-            res.send('Project "' + req.body.projectname + '" successfully created');
-            return console.log("directory created successfully!");
+            console.error('Registration failed: ' + err);
+            res.status(400);
+            res.send("Registration failed.");
         }
     });
 });
 
-//TODO: Check if Database Entry was successfully deleted before deleting the directory.
-//TODO: Delete Content of directory recursively before deleting the directory.
-//TODO: Check if User is Owner of the Project to be deleted.
+router.post('/newProject', function (req, res) {
+    apiFunctions.newProject(req.body.projectname, req.user.id, function (err) {
+        if(!err) {
+            res.send("Created Project '" + req.body.projectname + "'");
+        } else {
+            console.error("Failed to create project: " + err);
+            res.send("Failed to create project");
+        }
+    });
+});
+
 router.post('/deleteProject', function(req, res){
-    dbFunctions.deleteProject(req.body.projectid);
-    try{
-        fs.rmdir('./data/'+req.body.projectname,function(err) {
-            if(err) {
-                res.send('Project ' + req.body.projectname + ' could not be deleted. Are you the Owner?');
-                return console.error(err);
-            } else {
-                res.send('Project "' + req.body.projectname + '" successfully deleted');
-                return console.log("deleted directory");
-            }
-        });}
-    catch(err) {
-        console.log(err);
-    }
+    console.log(req.body);
+    apiFunctions.deleteProject(req.body.projectid, req.body.projectname, req.user.id, function (err) {
+        if(!err) {
+            res.send("Project was deleted");
+        } else {
+            console.error(err);
+            res.send("Failed to delete project, are you the Owner?");
+        }
+    })
 });
 
 //TODO: Maybe enable Users to change Passwords
 //FIXME: Check for Database Errors!
 router.post('/editUser', function(req,res){
-    dbFunctions.editUser(req.body.username, req.body.email, req.body.city, req.body.country, req.user.id);
-    res.send("User successfully edited");
+    dbFunctions.editUser(req.body.username, req.body.email, req.body.city, req.body.country, req.user.id, function (err, result) {
+        if(!err) {
+            res.send("User successfully edited");
+        } else {
+            console.error(err);
+            res.status(400).send("User edit failed.")
+        }
+    });
 });
 
 
@@ -84,7 +86,7 @@ router.post('/fileUpload', function (req, res) {
     //console.log(req);
     var form = new formidable.IncomingForm();
 
-    form.multiples = false;
+    form.multiples = true;
 
     form.uploadDir = path.join(__dirname, '../data/projects');
 
@@ -94,17 +96,14 @@ router.post('/fileUpload', function (req, res) {
         console.log(file);
         fs.rename(file.path, path.join(form.uploadDir, file.name));
     });
-
     // log any errors that occur
     form.on('error', function(err) {
         console.log('An error has occured: \n' + err);
     });
-
     // once all the files have been uploaded, send a response to the client
     form.on('end', function() {
         res.end('success');
     });
-
     // parse the incoming request containing the form data
     form.parse(req);
 });

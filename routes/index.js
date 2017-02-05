@@ -3,7 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 
 var pp = require('../bin/etc/passport_setup');
-var db_functions = require('../bin/etc/db_functions');
+var dbFunctions = require('../bin/etc/db_functions');
 
 pp.passport_setup();
 
@@ -26,7 +26,7 @@ router.get('/sign-up', function (req, res) {
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
-        db_functions.getUserProjects(req.user.id, function (err, rows) {
+        dbFunctions.getUserProjects(req.user.id, function (err, rows) {
             projects = rows;
             console.log(rows);
             res.render('my-projects', { rows: projects , user: req.user });
@@ -47,7 +47,7 @@ router.get('/my-account', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
         var user;
-        db_functions.getUser(req.user.id, function (err, row) {
+        dbFunctions.getUser(req.user.id, function (err, row) {
             user = row;
             res.render('my-account', { title: 'My Account - ' + user.name + ' (' + user.email + ')', user: user });
         });
@@ -67,14 +67,14 @@ router.get('/map-view', function (req, res) {
     var project;
     if(req.user && req.query.projectID) {
 
-        db_functions.getProjectByHash(req.query.projectID, function(err, row) {
+        dbFunctions.getProjectByHash(req.query.projectID, function(err, row) {
             if(!err){
                 console.log(row);
                 project = row;
                 //console.log(req.user);
                 res.render('map-view', { title: 'Map View', user: req.user, project: project });
             } else {
-                res.send('buh')
+                res.send('buh');
                 console.log(err);
             }
         });
