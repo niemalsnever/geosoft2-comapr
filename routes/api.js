@@ -83,6 +83,17 @@ router.post('/saveCode*', function(req, res){
     })
 });
 
+router.post('/shareProject',function(req,res){
+    apiFunctions.shareProject(req.body.projectHash, req.user.id, req.body.email,read, write, share,  function (err){
+        if(!err){
+            res.send("Project shared with dummyname");
+        } else {
+            console.error(err);
+            res.send("failed to share Project, do you have permission to share?");
+        }
+    })
+});
+
 //TODO: This needs some polish
 router.post('/fileUpload*', function (req, res) {
     try {

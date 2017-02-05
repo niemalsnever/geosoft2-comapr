@@ -6,7 +6,7 @@ function deleteUser(id)
         data: {
             'userID': id
         },
-        success: function(){
+        success: function() {
             setTimeout(function(){window.location.href="/sign-up"}, 200);
         }
     })

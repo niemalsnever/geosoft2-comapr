@@ -78,6 +78,8 @@ function getUserProjects() {
                         '<tr>' +
                         '<td>' +
                         '<a href="/map-view?projectID=' + projects[i].projecthash + '">' + projects[i].projectname + '</a>' +
+                        '</td>' +
+                        '<td>' +
                         '<span class="pull-right">' +
                         '<a href="#" data-original-title="invite user" data-toggle="tooltip" type="button" class="btn btn-info"><i class="glyphicon glyphicon-share"></i>Invite User</a> ' +
                         '<a data-original-title="Remove this project" data-toggle="tooltip" onclick="deleteProject(' + projects[i].projectid + ',\'' + projects[i].projectname + '\');" class="btn btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete Project</a> ' +

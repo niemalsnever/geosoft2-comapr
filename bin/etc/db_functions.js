@@ -83,5 +83,31 @@ module.exports = {
                 callback(err, result);
             });
         })
-    }
+    },
+
+    shareProject : function(projectHash, sharedBy, shareWithEmail,read, write, share, callback){
+        db.serialize(function(){
+            try{
+                db.get('SELECT id FROM Projects WHERE hashProject = ?;', projectHash, function (err, row) {
+                    var projectid = row.id;
+                    db.get('SELECT COUNT(*) AS c FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE ((Permissions.userid = ? AND Permissions.share = "true") OR Projects.ownerid = ?) AND Projects.id = ?;', sharedBy, sharedBy, projectid, function (err, row) {
+                        var canShare = row.c;
+                        db.get('SELECT id FROM Users WHERE email = ?;', shareWithEmail, function (err, row) {
+                            var sharedWith = row.id;
+
+                            if (canShare > 0) {
+                                console.log('treffer');
+                                db.run('INSERT INTO Permissions VALUES (null , ? , ? , ? , ? , ?);', sharedWith, projectid, read, write, share, function (err) {
+                                    callback(err);
+                                });
+                            }
+                        });
+                    });
+                });
+            } catch(e) {
+                console.error(e);
+                callback(e);
+            }
+        });
+    },
 };

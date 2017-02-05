@@ -54,5 +54,11 @@ module.exports = {
         dbFunctions.registerUser(name, email, city, country, hash, now, function (err) {
             callback(err);
         })
+    },
+
+    shareProject: function(projectHash, sharedBy,shareWithEmail,read, write, share, callback){
+        dbFunctions.shareProject(projectHash, sharedBy, shareWithEmail,read, write, share, function(err){
+            callback(err);
+        })
     }
 };
