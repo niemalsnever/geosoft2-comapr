@@ -13,13 +13,28 @@ module.exports = {
             });
         })
     },
-
     getUserProjects : function(id, callback){
         db.serialize(function() {
-            db.all('SELECT Projects.id AS projectid, Projects.name AS projectname FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?;', id, id, function(err, rows)
-            {
+            db.all('SELECT Projects.id AS projectid, Projects.name AS projectname, Projects.hashProject as projecthash FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?;', id, id, function(err, rows)
+                  {
                 callback(err, rows);
             });
+        });
+    }
+    ,
+    getProjectByHash : function(hashProject, callback){
+        db.serialize(function(){
+            db.get('SELECT * FROM Projects WHERE hashProject = ?;', hashProject, function(err, row){
+                callback(err, row);
+            });
+        })
+    },
+    
+    deleteProject : function(id, callback){
+        db.run('delete from Projects where Projects.id = ?', id ,function(err, result)
+              {
+            callback (err, result);
+        });
         })
     },
 
@@ -45,27 +60,18 @@ module.exports = {
         });
     },
 
-    deleteUser: function(id){
-        db.run("DELETE from Users where id = ?;", id);
+    deleteUser: function(id, callback){
+        db.run('delete from Users where Users.id = ?', id ,function(err, result)
+        {
+            callback (err, result);
+        });
     },
 
-    editUser: function(name, email, city, country, id) {
-        db.run("UPDATE Users Set name=?, email=?, city=?, country=?  WHERE id=?;", name, email, city, country, id);
-    },
-
-
-
-
-
-
-
-    // FIXME: Probably unnecessary
-    projectID : function(callback){
-        db.serialize(function(){
-            db.get('SELECT Projects.id AS projectID FROM Projects WHERE Projects.id = ?;',id, function(err, row){
-                callback(err,row);
-
-            });
-        })
-    }
-};
+editUser: function(name, email, city, country, callback){
+    db.serialize(function(){
+        db.run('UPDATE Users Set name= ?, email=?, city=?, country=? WHERE id=? VALUES (?, ?, ?, ?, ?);', Username, email, city, country, id, function(err, result)
+        {
+            callback(err, result);
+        });
+    })
+}
