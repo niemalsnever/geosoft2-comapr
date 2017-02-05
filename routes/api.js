@@ -130,7 +130,7 @@ router.post('/runRScript', function (req,res) {
     code = req.body.code;
     now = Date.now();
 
-    
+
 
     scidbConnectScript = fs.readFileSync(path.join(__dirname, '../data/system_files/scidb_connect.r'));
 
@@ -179,7 +179,6 @@ router.post('/runRScript', function (req,res) {
 
 router.post('/getDataTree', function(req, res){
     var mytree = dirTree(path.join(__dirname, '../data/projects/' + req.body.projectName));
-    console.log(mytree);
     res.json(mytree);
 
 });

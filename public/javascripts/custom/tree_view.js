@@ -5,7 +5,6 @@
 var tree;
 
 var dataTreeUpdate = function(){
-    console.log('HuHu');
     $.ajax({
         type: "POST",
         url: '/api/getDataTree',
@@ -13,14 +12,16 @@ var dataTreeUpdate = function(){
             projectName: projectName.toString()
         },
         success: function(data) {
-            console.log(data);
-            tree = [data];
-            return data;
+            tree = data;
         },
         complete: function() {
-            $('#tree').treeview({
-                data: tree
-            });
+            if (tree != null) {
+                $('#tree').treeview({
+                    data: [tree]
+                });
+            } else {
+                $('#tree').append('<div style="font-size: small; text-align: center; font-style: italic">Your project does not contain any files</div>')
+            }
         }
     })
 };
