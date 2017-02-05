@@ -1,11 +1,13 @@
 var apiFunctions = require('../etc/api_functions.js');
 require('../etc/db_setup.js')
 
+apiFunctions.registerUser('Hans', 'hans@test.de' , 'Muenster', 'Deutschland', 'hallo',  function (err) {
+    console.log("hans");
+    
 apiFunctions.registerUser('Heinz', 'heinz@test.de' , 'Muenster', 'Deutschland', 'hallo',  function (err) {
     console.log("heinz");
 });
-apiFunctions.registerUser('Hans', 'hans@test.de' , 'Muenster', 'Deutschland', 'hallo',  function (err) {
-    console.log("hans");
+
 });
 apiFunctions.newProject('testtesttest', 1 ,function(err){
     console.log("new project");

@@ -4,7 +4,7 @@ function deleteUser(id)
         url: '/api/deleteUser',
         type: 'POST',
         data: {
-            'userID': id
+            'id': id
         },
         success: function() {
             setTimeout(function(){window.location.href="/sign-up"}, 200);

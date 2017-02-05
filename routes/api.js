@@ -31,6 +31,20 @@ router.post('/registerUser', function (req, res) {
     });
 });
 
+router.post('/deleteUser', function(req, res){
+    console.log(req.body);
+    apiFunctions.deleteUser(req.user.id, function (err) {
+        if(!err) {
+            res.send("User was deleted");
+        } else {
+            console.error(err);
+            res.send("Failed to delete User");
+        }
+    })
+});
+
+//db function rekursiv user projects löschen
+
 router.post('/newProject', function (req, res) {
     apiFunctions.newProject(req.body.projectname, req.user.id, function (err) {
         if(!err) {

@@ -47,7 +47,19 @@ module.exports = {
             }
         })
     },
-
+    
+    //FIXME
+    deleteUser: function(userID,callback){
+       dbFunctions.getUserProjects(userID, function(err,rows){
+           
+            for(i=0; i<rows.length; i++) {
+                this.deleteProject(rows[i].projectid, rows[i].projectname, userID, function(err){
+                    callback(err);
+                });
+            }
+       });
+    },
+    
     registerUser: function (name, email, city, country, password, callback) {
         var now = Date.now().toString();
         var hash = helper.hashPassword(password.toString(), now);
