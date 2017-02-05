@@ -41,6 +41,7 @@ module.exports = {
                 helper.deleteFolderRecursive(projectDirPath, function (err) {
                     callback(err)
                 })
+                callback();
             } else {
                 callback(err);
             }

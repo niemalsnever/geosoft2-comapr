@@ -16,7 +16,6 @@ module.exports = {
 
     getUserProjects : function(id, callback){
         db.serialize(function() {
-            console.log("I'm hit");
             db.all('SELECT Projects.id AS projectid, Projects.name AS projectname, Projects.hashProject as projecthash FROM Projects LEFT OUTER JOIN Permissions ON Projects.id = Permissions.projectid WHERE Permissions.userid = ? OR Projects.ownerid = ?;', id, id, function(err, rows)
             {
                 callback(err, rows);
@@ -59,14 +58,16 @@ module.exports = {
         console.log(userid);
         db.serialize(function () {
             try {
+                console.log('db.serialize started');
                 db.run('DELETE FROM Permissions WHERE Permissions.projectid = ? ', projectid);
                 db.run("DELETE FROM Projects WHERE Projects.id = ? AND Projects.ownerid = ?;", projectid, userid);
             } catch (e) {
                 console.error(e);
                 return callback(e);
+            } finally {
+                callback();
             }
         });
-        callback();
     },
 
     deleteUser: function(id, callback){

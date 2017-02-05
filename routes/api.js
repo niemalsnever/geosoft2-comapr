@@ -186,12 +186,14 @@ router.post('/getDataTree', function(req, res){
 });
 
 router.get('/getUserProjects', function (req, res) {
-    var userProjects = dbFunctions.getUserProjects(req.user.id);
-    if(!err) {
-        res.json(userProjects);
-    } else {
-        res.status(400).send('Could not get user projects');
-    }
+    dbFunctions.getUserProjects(req.user.id, function (err, rows) {
+        if(!err) {
+            res.json(rows);
+        } else {
+            res.status(418).send('Could not get user projects');
+        }
+    });
+
 });
 
 module.exports = router;
