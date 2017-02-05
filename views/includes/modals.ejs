@@ -8,24 +8,73 @@
             </div>
             <form action="/api/newProject" method="post">
                 <div class="modal-body">
+                    <div>Create a new project.</div>
                     <table class="table table-newproject-modal">
                         <tr>
                             <td>Name</td>
                             <td><input type="text" placeholder="The name of your project" class="form-control"
                                        name="projectname" id="project-name"></td>
                         </tr>
-                        <tr>
-                            <td>Share with</td>
-                            <td><input type="text" placeholder="E-mail addresses of the other contributors"
-                                       class="form-control"></td>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
                     <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val());"><i class="glyphicon glyphicon-ok"></i> New Project</a>
-
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Publish Project Dialogue -->
+<div id="publishProjectModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Publish Project</h4>
+            </div>
+                <div class="modal-body">
+                    <table class="table table-newproject-modal">
+                        <tr>
+                            <h5>You will receive a Permalink to access your published Project.<br/>
+                                Be aware that everybody can access it via this link.</h5>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
+                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val());"><i class="glyphicon glyphicon-ok"></i> Publish project</a>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Share Project Dialogue -->
+<div id="shareProjectModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Share Project</h4>
+            </div>
+                <div class="modal-body">
+                    <div>Invite a user via entering his E-mail address here:</div>
+                    <table class="table table-newproject-modal">
+                        <tr>
+                        <tr>
+                            <td>Share with</td>
+                            <td><input type="text" placeholder="E-mail address"
+                                       class="form-control"></td>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
+                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val());"><i class="glyphicon glyphicon-ok"></i> Share Project</a>
+
+                </div>
         </div>
     </div>
 </div>
