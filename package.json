@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.15.2",
+    "bootstrap-treeview-node": "^3.1.0",
     "connect-ensure-login": "latest",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",

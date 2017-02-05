@@ -36,13 +36,13 @@ function uploadFile() {
     $.ajax({
         type: "POST",
         data: formData,
-        url: '/api/fileUpload',
+        url: '/api/fileUpload?pn=' + projectName,
         processData: false,
         contentType: false,
         timeout: 10000,
         success: function(data, textStatus){
             console.log("successfully saved");
-            //TODO: Trigger Data Tree Update
+            dataTreeUpdate();
         },
         error: function(xhr, textStatus, errorThrown){
             console.log("saving failed");

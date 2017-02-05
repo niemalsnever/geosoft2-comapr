@@ -116,6 +116,10 @@
 <%- include('includes/modals.ejs') %>
 <%- include('includes/footer.ejs') %>
 
+<script type="text/javascript">
+    var projectName = '<%= project.name %>';
+</script>
+
 <!-- Codemirror Files -->
 <script src="javascripts/codemirror.js"></script>
 <script src="javascripts/custom/r.js"></script>
@@ -138,6 +142,9 @@
 <!-- Bootstrap Treeview JavaScript Files -->
 <script src="javascripts/bootstrap-treeview.js"></script>
 <script src="javascripts/custom/tree_view.js"></script>
+<script type="text/javascript">
+    dataTreeUpdate();
+</script>
 <!-- Bootstrap Treeview JavaScript Files -->
 
 

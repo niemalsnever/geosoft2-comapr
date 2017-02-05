@@ -8,15 +8,15 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require("body-parser");
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded());
 
-//var helper = require('../bin/etc/helper_functions.js');
 var dbFunctions = require('../bin/etc/db_functions');
 var apiFunctions = require('../bin/etc/api_functions');
 
+var dirTree = require('bootstrap-treeview-node');
+
 var util = require('util');
-
 var exec = require('child_process').exec;
-
 var formidable = require('formidable');
 
 
@@ -82,53 +82,55 @@ router.post('/saveCode', function(req, res){
 });
 
 //TODO: This needs some polish
-router.post('/fileUpload', function (req, res) {
-    //console.log(req);
-    var form = new formidable.IncomingForm();
+router.post('/fileUpload*', function (req, res) {
+    try {
+        var form = new formidable.IncomingForm();
 
-    form.multiples = true;
+        form.multiples = true;
 
-    form.uploadDir = path.join(__dirname, '../data/projects');
-
-    // every time a file has been uploaded successfully,
-    // rename it to it's orignal name
-    form.on('file', function(field, file) {
-        console.log(file);
-        fs.rename(file.path, path.join(form.uploadDir, file.name));
-    });
-    // log any errors that occur
-    form.on('error', function(err) {
-        console.log('An error has occured: \n' + err);
-    });
-    // once all the files have been uploaded, send a response to the client
-    form.on('end', function() {
-        res.end('success');
-    });
-    // parse the incoming request containing the form data
-    form.parse(req);
-});
-
-router.post('/runCode', function (req,res) {
-    console.log(req.body.code);
-    code = req.body.code;
-    //FIXME: THIS IS A HORRIBLE SECURITY RISK! DO NOT PUBLISH THIS CODE!!!
-    exec(code, function (error, stdout, stderr) {
-        if(error) {
-            console.error(error);
-            res.send('Execution failed: ' + error);
+        try {
+            form.uploadDir = path.join(__dirname, '../data/projects/' + req.query.pn);
+        } catch (e) {
+            console.error(e);
         }
-        else {
-            console.log(stdout);
-            console.error(stderr);
-            res.send('Execution successful: ' + stdout + "\n" + stderr);
+
+        // every time a file has been uploaded successfully,
+        // rename it to it's orignal name
+        try {
+            form.on('file', function (field, file) {
+                try {
+                    fs.rename(file.path, path.join(form.uploadDir, file.name));
+                } catch (e) {
+                    console.error(e);
+                }
+            });
+        } catch (e) {
+            console.error(e);
         }
-    });
+        // log any errors that occur
+        form.on('error', function (err) {
+            console.log('An error has occured: \n' + err);
+        });
+        // once all the files have been uploaded, send a response to the client
+        form.on('end', function () {
+            res.end('success');
+        });
+        // parse the incoming request containing the form data
+        try {
+            form.parse(req);
+        } catch (e) {
+            console.error(e);
+        }
+    } catch (e) {
+        console.error(e);
+    }
 });
 
 router.post('/runRScript', function (req,res) {
     code = req.body.code;
     now = Date.now();
 
+    
 
     scidbConnectScript = fs.readFileSync(path.join(__dirname, '../data/system_files/scidb_connect.r'));
 
@@ -173,6 +175,13 @@ router.post('/runRScript', function (req,res) {
             res.send('Something went wrong when saving the temp file');
         }
     });
+});
+
+router.post('/getDataTree', function(req, res){
+    var mytree = dirTree(path.join(__dirname, '../data/projects/' + req.body.projectName));
+    console.log(mytree);
+    res.json(mytree);
+
 });
 
 module.exports = router;

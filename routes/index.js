@@ -110,15 +110,13 @@ router.post('/login', function(req, res, next) {
              if (err) {
                  return next(err);
              }
-             return res.send(req.body.rto || '/good-login');
+             return res.send('/good-login');
          });
      })(req, res, next);
  });
 
 router.get('/good-login', function (req, res) {
-    if(req.user && (req.body.rto != '' && req.body.rto)) {
-        res.redirect(req.body.rto);
-    } else if(req.user) {
+    if(req.user) {
         res.redirect('/my-projects');
     } else {
         res.status(403).render('error',  {error: {
