@@ -163,7 +163,7 @@ router.post('/runRScript', function (req,res) {
                         var cmd = 'Rscript ' + fileName;
 
                         try {
-                            exec(cmd, function (error, stdout, stderr) {
+                            exec(cmd,{ cwd: path.join(__dirname, '../data/projects/' + projectHash) }, function (error, stdout, stderr) {
                                 if (error) {
                                     console.error(error);
                                     res.send('Execution failed: ' + error);
@@ -204,6 +204,17 @@ router.get('/getUserProjects', function (req, res) {
         }
     });
 
+});
+
+router.post('/getTMSLayers*', function (req, res) {
+    folder = path.join(__dirname, '../data/projects/' + req.body.projectHash + '/TMS' );
+    apiFunctions.getDirs(folder, function (dirs) {
+        if(dirs) {
+            res.json(dirs);
+        } else {
+            res.status(400).send('Error listing directories');
+        }
+    });
 });
 
 module.exports = router;

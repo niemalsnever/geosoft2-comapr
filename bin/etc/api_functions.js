@@ -62,5 +62,32 @@ module.exports = {
         dbFunctions.shareProject(projectHash, sharedBy, shareWithEmail,read, write, share, function(err){
             callback(err);
         })
+    },
+
+
+    getDirs: function(rootDir, cb) {
+        console.log(rootDir);
+        try {
+            fs.readdir(rootDir, function(err, files) {
+                var dirs = [];
+                for (var index = 0; index < files.length; ++index) {
+                    var file = files[index];
+                    if (file[0] !== '.') {
+                        var filePath = rootDir + '/' + file;
+                        fs.stat(filePath, function(err, stat) {
+                            if (stat.isDirectory()) {
+                                dirs.push(this.file);
+                            }
+                            if (files.length === (this.index + 1)) {
+                                return cb(dirs);
+                            }
+                        }.bind({index: index, file: file}));
+                    }
+                }
+            });
+        } catch(e) {
+            cb(e);
+        }
+
     }
 };

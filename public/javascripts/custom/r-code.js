@@ -46,6 +46,8 @@ function saveTextAsR() {
 function runRCode() {
     var content = editor.getValue();
     console.log("This is content: " + content);
+    $('#runButton').text('Running');
+    $('#runButton')[0].disabled = true;
     $.ajax({
         url: '/api/runRScript',
         type: 'POST',
@@ -57,6 +59,9 @@ function runRCode() {
         success: function (data) {
             console.log(data);
             $('body').append('<pre>' + data + '</pre>');
+            dataTreeUpdate();
+            $('#runButton').text('Run');
+            $('#runButton')[0].disabled = false;
 
         }
     })

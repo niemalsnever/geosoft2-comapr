@@ -187,4 +187,4 @@ function logCoords(type, layer) {
 
     }
 }
-//
+
