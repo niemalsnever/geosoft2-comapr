@@ -50,12 +50,14 @@ function runRCode() {
         url: '/api/runRScript',
         type: 'POST',
         data: {
-            'code': content
+            'code': content,
+            'projectHash': projectHash
         },
         processData: 'false',
         success: function (data) {
             console.log(data);
-            $('body').append(data);
+            $('body').append('<pre>' + data + '</pre>');
+
         }
     })
 }

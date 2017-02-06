@@ -141,55 +141,53 @@ router.post('/fileUpload*', function (req, res) {
 });
 
 router.post('/runRScript', function (req,res) {
-    code = req.body.code;
-    now = Date.now();
+    var code = req.body.code;
+    var projectHash = req.body.projectHash;
+    var now = Date.now();
 
 
+    fs.readFile(path.join(__dirname, '../data/system_files/scidb_connect.r'), function (err, data) {
 
-    scidbConnectScript = fs.readFileSync(path.join(__dirname, '../data/system_files/scidb_connect.r'));
+        fileName = path.join(__dirname, '../data/.tmp/' + now) + '.r';
 
-    fileName = path.join(__dirname, '../data/.tmp/' + now) + '.r';
 
-    fs.writeFile(fileName, scidbConnectScript, function(err) {
-        if (!err) {
-            console.log('no Error writing static code');
-            fs.appendFile(fileName, code, function (err) {
-                console.log('append started');
-                if(err) {
-                    console.error('Something went wrong when appending the code ' + err);
-                    res.send('Something went wrong when appending the code ');
-                } else {
-                    var cmd = 'Rscript ' + fileName;
+        fs.writeFile(fileName, data, function(err) {
+            if (!err) {
+                console.log('no Error writing static code');
+                fs.appendFile(fileName, code, function (err) {
+                    console.log('append started');
+                    if(err) {
+                        console.error('Something went wrong when appending the code ' + err);
+                        res.send('Something went wrong when appending the code ');
+                    } else {
+                        var cmd = 'Rscript ' + fileName;
 
-                    try {
-                        exec(cmd, function (error, stdout, stderr) {
-                            if (error) {
-                                console.error(error);
-                                res.send('Execution failed: ' + error);
-                            }
-                            else {
-                                console.log(stdout);
-                                console.error(stderr);
-                                res.send('Execution successful: ' + stdout + "\n" + stderr);
-                            }
-                        })
-                    } catch (error) {
-                        console.error(error);
-                    } finally {
                         try {
-                            fs.unlink(fileName);
-                        } catch (e) {
-                            console.log(e);
+                            exec(cmd, function (error, stdout, stderr) {
+                                if (error) {
+                                    console.error(error);
+                                    res.send('Execution failed: ' + error);
+                                }
+                                else {
+                                    console.log(stdout);
+                                    console.error(stderr);
+                                    res.send('Execution successful: ' + stdout + "\n" + stderr);
+                                }
+                            })
+                        } catch (error) {
+                            console.error(error);
                         }
                     }
-                }
-            })
-        } else {
-            console.error('Something went wrong when saving the temp file ' + err);
-            res.send('Something went wrong when saving the temp file');
-        }
+                });
+            } else {
+                console.error('Something went wrong when saving the temp file ' + err);
+                res.send('Something went wrong when saving the temp file');
+            }
+        });
     });
 });
+
+
 
 router.post('/getDataTree', function(req, res){
     var mytree = dirTree(path.join(__dirname, '../data/projects/' + req.body.projectName));
