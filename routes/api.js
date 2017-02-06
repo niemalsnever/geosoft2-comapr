@@ -33,7 +33,9 @@ router.post('/registerUser', function (req, res) {
 
 router.post('/deleteUser', function(req, res){
     console.log(req.body);
-    apiFunctions.deleteUser(req.user.id, function (err) {
+    var userid = req.user.id;
+    req.logout();
+    apiFunctions.deleteUser(userid, function (err) {
         if(!err) {
             res.send("User was deleted");
         } else {

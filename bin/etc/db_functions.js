@@ -70,13 +70,13 @@ module.exports = {
         });
     },
 
-    deleteUser: function(id, callback){
+    deleteUser: function(id ,callback){
         db.run('delete from Users where Users.id = ?;', id ,function(err, result)
-        {
+       {
             callback (err, result);
         });
     },
-
+ 
     editUser: function(name, email, city, country, id, callback) {
         db.serialize(function () {
             db.run("UPDATE Users Set name=?, email=?, city=?, country=?  WHERE id=?;", name, email, city, country, id, function (err, result) {

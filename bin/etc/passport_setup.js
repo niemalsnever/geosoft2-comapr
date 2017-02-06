@@ -33,7 +33,7 @@ module.exports = {
 
         passport.deserializeUser(function (id, done) {
             db.get('SELECT id, email, name FROM Users WHERE id = ?', id, function (err, row) {
-                return done(null, row);
+            return done(null, row);
             });
         });
     },

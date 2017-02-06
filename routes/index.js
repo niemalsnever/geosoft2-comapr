@@ -23,6 +23,13 @@ router.get('/sign-up', function (req, res) {
     res.render('index', { title: 'Login' });
 });
 
+router.post('/deleteUser', function(req,res){
+    req.body.rto="";
+    req.logout();
+    api.deleteUser(req.body.userID);
+    res.send("User successfully deleted");
+    });
+    
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
