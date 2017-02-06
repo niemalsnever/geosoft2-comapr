@@ -43,8 +43,9 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
-                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val());"><i class="glyphicon glyphicon-ok"></i> Publish project</a>
+                    <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel
+                        <!-- FIXME! -->
+                    <a title="Publish Project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick =""><i class="glyphicon glyphicon-ok"></i> Publish project</a>
 
                 </div>
         </div>
@@ -64,16 +65,22 @@
                     <div>Invite a user via entering his E-mail address here:</div>
                     <table class="table table-newproject-modal">
                         <tr>
+                            <td><label for="shareEmailInput">Share with</label></td>
+                            <td><input type="text" placeholder="E-mail address" class="form-control" id="shareEmailInput"></td>
+                        </tr>
                         <tr>
-                            <td>Share with</td>
-                            <td><input type="text" placeholder="E-mail address"
-                                       class="form-control"></td>
+                            <td>Permissions</td>
+                            <td><fieldset>
+                                    <label for="allowRead">Read</label> <input type="checkbox" id="allowRead"><br>
+                                    <label for="allowWrite">Write</label> <input type="checkbox" id="allowWrite"><br>
+                                    <label for="allowShare">Share</label> <input type="checkbox" id="allowShare"><br>
+                                </fieldset></td>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <a title="Cancel" data-toggle="tooltip" type="button" class="btn btn-danger btn-md" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
-                    <a title="Create project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="newProject($('#project-name').val());"><i class="glyphicon glyphicon-ok"></i> Share Project</a>
-
+                    <a title="Share Project" data-toggle="tooltip" type="button" class="btn btn-success btn-md" data-dismiss="modal" onclick ="shareProject('<%= typeof project != 'undefined' ? project.hashProject : '' %>')"><i class="glyphicon glyphicon-ok"></i> Share Project</a>
                 </div>
         </div>
     </div>

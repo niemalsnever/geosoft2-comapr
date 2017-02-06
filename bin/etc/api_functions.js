@@ -56,6 +56,8 @@ module.exports = {
         })
     },
 
+
+
     shareProject: function(projectHash, sharedBy,shareWithEmail,read, write, share, callback){
         dbFunctions.shareProject(projectHash, sharedBy, shareWithEmail,read, write, share, function(err){
             callback(err);

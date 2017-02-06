@@ -84,7 +84,8 @@ router.post('/saveCode*', function(req, res){
 });
 
 router.post('/shareProject',function(req,res){
-    apiFunctions.shareProject(req.body.projectHash, req.user.id, req.body.email,read, write, share,  function (err){
+    console.log(req.body);
+    apiFunctions.shareProject(req.body.projectHash, req.user.id, req.body.shareWithEmail, req.body.read, req.body.write, req.body.share,  function (err){
         if(!err){
             res.send("Project shared with dummyname");
         } else {

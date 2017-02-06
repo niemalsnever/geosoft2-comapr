@@ -59,7 +59,7 @@ module.exports = {
         db.serialize(function () {
             try {
                 console.log('db.serialize started');
-                db.run('DELETE FROM Permissions WHERE Permissions.projectid = ? ', projectid);
+                db.run('DELETE FROM Permissions WHERE Permissions.projectid = ?', projectid);
                 db.run("DELETE FROM Projects WHERE Projects.id = ? AND Projects.ownerid = ?;", projectid, userid);
             } catch (e) {
                 console.error(e);

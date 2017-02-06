@@ -23,8 +23,8 @@ function deleteProject(id, projectname) {
                 $('#alert-space').empty();
                 $('#alert-space').prepend(
                     '<div class="alert alert-danger alert-dismissable fade in">' +
-                        '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-                        data.responseText +
+                    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                    data.responseText +
                     '</div>'
                 )
             }
@@ -93,3 +93,17 @@ function getUserProjects() {
     })
 }
 
+function shareProject(projectHash) {
+    $.ajax({
+        url: 'api/shareProject',
+        type: 'POST',
+        data: {
+            projectHash: projectHash,
+            shareWithEmail: $('#shareEmailInput').val(),
+            read: $('#allowRead').val(),
+            write: $('#allowWrite').val(),
+            share: $('#allowShare').val(),
+
+        }
+    })
+}
