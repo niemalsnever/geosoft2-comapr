@@ -113,11 +113,13 @@ fabric.properties
 
 # project files should be checked into the repository, unless a significant
 # proportion of contributors will probably not be using SublimeText
+.sublime-project
 
 # Project specific files
 comapr.db
 
 
 /data/.tmp
-
 /data/projects/
+/data/system_files/scidb_connect.r
+!/data/system_files/scidb_connect.r.dist
