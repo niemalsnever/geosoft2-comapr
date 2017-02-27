@@ -1,15 +1,15 @@
 # Installation Guide
 
-##Advisory/Hinweis
+## Advisory/Hinweis
 CoMapR is neither safe nor secure and basically makes a shell available through a website. We strongly advise anyone not to use this project! This project was created during a course at WWU Münster and should only be used in the context of this course!
 
-**This project MUST NOT be run as root!  
-Please use only in a highly secured environment and DO NOT make a machine where this runs on available on the internet! Seriously, NEVER run this as root!**
+**This project MUST NOT be run as root!
+Please use only in a highly secured environment and DO NOT make a machine, on which this project runs, available to the internet! Seriously, NEVER run this as root!**
 
-CoMapR ist nicht sicher und hängt im Prinzip eine Shell ans Netz. Von einer Nutzung dieses Projekts wird deshalb dringend abgeraten! Das Projekt wurde im Rahmen eines Kurses an der WWU Münster erstellt und sollte nur in dessen Rahmen verwendet werden. 
+CoMapR ist nicht sicher und stellt im Prinzip eine Shell als Website bereit. Von einer Nutzung dieses Projekts wird deshalb dringend abgeraten! Das Projekt wurde im Rahmen eines Kurses an der WWU Münster erstellt und sollte nur in dessen Rahmen verwendet werden.
 
-**Dieses Projekt DARF UNTER KEINEN UMSTÄNDEN als root ausgeführt werden!  
-Dieses Projekt sollte nur in einer hochgradig abgesicherten Umgebung installiert werden und KEINESFALLS im öffentlichen Internet erreichbar sein!** 
+**Dieses Projekt DARF UNTER KEINEN UMSTÄNDEN als root ausgeführt werden!
+Dieses Projekt sollte nur in einer hochgradig abgesicherten Umgebung installiert werden und KEINESFALLS im öffentlichen Internet erreichbar sein!**
 
 [German version below/Deutsche Version unten](#user-content-ger)
 
@@ -19,11 +19,13 @@ Dieses Projekt sollte nur in einer hochgradig abgesicherten Umgebung installiert
 
 ## Installing the Neccessary Packages
  1. Cloning the repository
+
     ```bash
     git clone https://github.com/niemalsnever/geosoft2-comapr
     cd geosoft2-comapr # Change to the freshly cloned directory
     ```
  2. Updating installed packages
+
     ```bash
     sudo apt-get autoremove && sudo apt-get update && sudo apt-get upgrade
     ```
@@ -71,7 +73,7 @@ Dieses Projekt sollte nur in einer hochgradig abgesicherten Umgebung installiert
 
     ```bash
     nano data/system_files/scidb_connect.r
-    # Fill in the credentials to connect to you SciDB instance, save the file and exit nano
+    # Fill in the credentials to connect to your SciDB instance, save the file and exit nano
     ```
 
 
@@ -100,11 +102,13 @@ In your webbrowser navigate to http://YOURHOST.TLD:PORT, CoMapR should now be li
 
 ## Installation der benötigten Pakete
  1. Clonen des Repositories
+
     ```bash
     git clone https://github.com/niemalsnever/geosoft2-comapr
-    cd geosoft2-comapr # Wechseln in das frisch geclonete Verzeichnis
+    cd geosoft2-comapr # Wechseln in das frisch ge-clone-te Verzeichnis
     ```
  2. Installierte Pakete aktualisieren
+
     ```bash
     sudo apt-get autoremove && sudo apt-get update && sudo apt-get upgrade
     ```
@@ -167,7 +171,7 @@ export PORT=YOUR_PORT
 
 ## Erster Start
 ```bash
-# Im gecloneten Verzeichnis
+# Im ge-clone-ten Verzeichnis
 npm start
 ```
 Im Browser http://YOURHOST.TLD:PORT aufrufen, CoMapR sollte nun funktionieren.
