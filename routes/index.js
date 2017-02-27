@@ -23,6 +23,10 @@ router.get('/sign-up', function (req, res) {
     res.render('index', { title: 'Login' });
 });
 
+router.get('/about_us', function (req, res) {
+    res.render('about_us', { title: 'About Us' });
+});
+
 router.get('/my-projects', function (req, res) {
     if(req.user) {
         //console.log(req.user.id);
